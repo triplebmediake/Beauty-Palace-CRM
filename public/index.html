@@ -1,0 +1,1123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cute Nails &amp; Salons Kenya</title>
+<style>
+  :root {
+    --teal: #0f9d98; --teal-d: #0b7773; --teal-l: #e3f5f4; --coral: #f7a99d; --coral-l: #fdeeea;
+    --ink: #1c2b2a; --mute: #5d6f6e; --line: #d8e4e3; --bg: #f6faf9; --card: #fff; --bad: #b42318; --bad-l: #fdecea; --ok: #067647;
+    --r: 12px;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 16px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: var(--ink); background: var(--bg); }
+  h1, h2, h3 { margin: 0 0 .5rem; line-height: 1.2; }
+  h2 { font-size: 1.15rem; } h3 { font-size: 1rem; }
+  button, input, select { font: inherit; color: inherit; }
+  button { cursor: pointer; border: 1px solid var(--line); background: var(--card); border-radius: 10px; padding: .55rem .9rem; min-height: 44px; }
+  button:hover { border-color: var(--teal); }
+  a.btn { display: inline-flex; align-items: center; cursor: pointer; border: 1px solid var(--line); background: var(--card); border-radius: 10px; padding: .55rem .9rem; min-height: 44px; color: inherit; text-decoration: none; }
+  a.btn.primary { background: var(--teal); border-color: var(--teal); color: #fff; font-weight: 600; }
+  button.primary { background: var(--teal); border-color: var(--teal); color: #fff; font-weight: 600; }
+  button.primary:hover { background: var(--teal-d); }
+  button:disabled { opacity: .5; cursor: not-allowed; }
+  button.link { border: 0; background: none; color: var(--teal-d); padding: .2rem .4rem; min-height: 0; text-decoration: underline; }
+  input, select, textarea { width: 100%; min-height: 44px; padding: .5rem .7rem; border: 1px solid var(--line); border-radius: 10px; background: #fff; }
+  input:focus, select:focus, textarea:focus, button:focus-visible { outline: 3px solid color-mix(in srgb, var(--teal) 40%, transparent); outline-offset: 1px; }
+  label { display: block; font-size: .85rem; color: var(--mute); margin: .6rem 0 .2rem; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 1rem; }
+  .muted { color: var(--mute); } .small { font-size: .85rem; }
+  .row { display: flex; gap: .6rem; align-items: center; flex-wrap: wrap; } .row > * { flex: 0 0 auto; }
+  .grow { flex: 1 1 160px !important; }
+  .right { margin-left: auto; }
+  .err { background: var(--bad-l); color: var(--bad); border-radius: 10px; padding: .6rem .8rem; margin: .6rem 0; }
+  .ok { background: #e7f6ee; color: var(--ok); border-radius: 10px; padding: .6rem .8rem; margin: .6rem 0; }
+  .shell { display: grid; grid-template-columns: 250px minmax(0, 1fr); min-height: 100vh; }
+  aside.side { background: var(--teal-d); color: #fff; display: flex; flex-direction: column; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
+  aside.side .brand { font-weight: 700; font-size: 1.1rem; padding: 1.1rem 1.1rem .8rem; line-height: 1.2; }
+  aside.side nav { display: flex; flex-direction: column; gap: .15rem; padding: .3rem .6rem; flex: 1; }
+  aside.side nav button { display: flex; align-items: center; gap: .7rem; width: 100%; text-align: left; background: none; border: 0; color: #ffffffd9; border-radius: 10px; padding: .65rem .8rem; min-height: 44px; }
+  aside.side nav button:hover { background: #ffffff1f; }
+  aside.side nav button[aria-selected="true"] { background: #fff; color: var(--teal-d); font-weight: 700; }
+  aside.side nav .ico { width: 1.4rem; text-align: center; flex: none; }
+  aside.side .who { padding: .8rem 1rem 1rem; border-top: 1px solid #ffffff33; font-size: .9rem; }
+  aside.side .who button { display: block; width: 100%; margin-top: .4rem; background: transparent; color: #fff; border-color: #ffffff80; min-height: 38px; }
+  .topbar { display: none; }
+  .scrim { display: none; }
+  @media (max-width: 900px) {
+    .shell { display: block; }
+    .topbar { display: flex; align-items: center; gap: .7rem; position: sticky; top: 0; z-index: 20; background: var(--teal); color: #fff; padding: .5rem .8rem; }
+    .topbar button { background: transparent; color: #fff; border-color: #ffffff80; min-height: 42px; min-width: 42px; font-size: 1.3rem; padding: .2rem .6rem; }
+    .topbar .title { font-weight: 700; }
+    aside.side { position: fixed; z-index: 40; left: 0; top: 0; bottom: 0; width: min(80vw, 290px); height: auto; transform: translateX(-102%); transition: transform .2s ease; box-shadow: none; }
+    .shell.open aside.side { transform: none; box-shadow: 0 0 30px #0006; }
+    .shell.open .scrim { display: block; position: fixed; inset: 0; background: #0006; z-index: 30; }
+  }
+  @media (prefers-reduced-motion: reduce) { aside.side { transition: none; } }
+  main { max-width: 1150px; margin: 0 auto; padding: 1rem; }
+  .login { max-width: 380px; margin: 8vh auto; }
+  .login h1 { color: var(--teal-d); font-size: 1.5rem; }
+  .login .tag { color: var(--mute); margin-bottom: 1rem; }
+  .sale { display: grid; grid-template-columns: 1fr 380px; gap: 1rem; align-items: start; }
+  @media (max-width: 860px) { .sale { grid-template-columns: 1fr; } }
+  .chips { display: flex; gap: .4rem; flex-wrap: wrap; margin: .6rem 0; }
+  .chip { border-radius: 999px; padding: .35rem .8rem; min-height: 36px; }
+  .chip[aria-pressed="true"] { background: var(--teal-l); border-color: var(--teal); color: var(--teal-d); font-weight: 600; }
+  .svc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: .5rem; }
+  .svc { text-align: left; display: flex; flex-direction: column; gap: .15rem; height: 100%; }
+  .svc .p { color: var(--teal-d); font-weight: 700; }
+  .panel { position: sticky; top: .5rem; }
+  .line { border-top: 1px solid var(--line); padding: .6rem 0; }
+  .total { font-size: 1.4rem; font-weight: 800; }
+  table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+  th, td { text-align: left; padding: .45rem .5rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; color: var(--mute); }
+  td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
+  .scroll { overflow-x: auto; }
+  tfoot td { font-weight: 700; }
+  .modal-bg { position: fixed; inset: 0; background: #0008; display: flex; align-items: center; justify-content: center; padding: 1rem; z-index: 10; }
+  .modal { background: #fff; border-radius: var(--r); max-width: 440px; width: 100%; max-height: 90vh; overflow: auto; padding: 1.2rem; }
+  .receipt { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .9rem; }
+  .receipt .r { display: flex; justify-content: space-between; gap: .5rem; }
+  .receipt hr { border: 0; border-top: 1px dashed #999; margin: .5rem 0; }
+  .pick { border: 1px solid var(--line); border-radius: 10px; margin-top: .3rem; }
+  .pick button { display: block; width: 100%; text-align: left; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; }
+  .pick button:last-child { border-bottom: 0; }
+  textarea { font: inherit; padding: .5rem .7rem; border: 1px solid var(--line); border-radius: 10px; resize: vertical; }
+  .tag-pill { display: inline-block; padding: .05rem .6rem; border-radius: 999px; background: var(--teal-l); color: var(--teal-d); font-size: .8rem; border: 1px solid var(--line); }
+  .tag-pill.vip { background: var(--coral); color: #5a1d14; border-color: var(--coral); font-weight: 700; }
+  .tag-pill.low { background: var(--bad-l); color: var(--bad); margin-left: .4rem; }
+  .stat { flex: 1 1 140px; background: var(--teal-l); border-radius: 10px; padding: .7rem .9rem; }
+  .stat b { display: block; font-size: 1.3rem; }
+  @media print { body * { visibility: hidden; } .modal, .modal * { visibility: visible; } .modal { position: absolute; inset: 0; max-height: none; } .noprint { display: none !important; } }
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+'use strict';
+// ---------- tiny helpers ----------
+// Skip empty slots (null / false) when filling a container, so conditional pieces never print as the word "false" or "null".
+{ const orig = Element.prototype.replaceChildren; Element.prototype.replaceChildren = function (...kids) { return orig.apply(this, kids.flat(Infinity).filter((x) => x != null && x !== false)); }; }
+const $app = document.getElementById('app');
+const h = (tag, attrs, ...kids) => {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) {
+    if (v == null || v === false) continue;
+    if (k.startsWith('on')) e.addEventListener(k.slice(2), v);
+    else if (k === 'class') e.className = v;
+    else if (k === 'value') e.value = v;
+    else e.setAttribute(k, v === true ? '' : v);
+  }
+  for (const c of kids.flat()) if (c != null && c !== false) e.append(c.nodeType ? c : document.createTextNode(String(c)));
+  return e;
+};
+const money = (n) => 'KSh ' + Number(n || 0).toLocaleString('en-KE', { maximumFractionDigits: 2 });
+const iso = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate() + n); return x; };
+const weekStart = (d) => addDays(d, -((d.getDay() + 1) % 7));          // business week runs Saturday to Friday
+const RANGES = {
+  today: () => [iso(new Date()), iso(new Date())],
+  week: () => { const s = weekStart(new Date()); return [iso(s), iso(addDays(s, 6))]; },
+  last: () => { const s = addDays(weekStart(new Date()), -7); return [iso(s), iso(addDays(s, 6))]; },
+  lastmonth: () => { const n = new Date(); return [iso(new Date(n.getFullYear(), n.getMonth() - 1, 1)), iso(new Date(n.getFullYear(), n.getMonth(), 0))]; },
+  month: () => { const n = new Date(); return [iso(new Date(n.getFullYear(), n.getMonth(), 1)), iso(new Date(n.getFullYear(), n.getMonth() + 1, 0))]; },
+};
+let mem = {};
+const store = { get: (k) => { try { return sessionStorage.getItem(k); } catch { return mem[k] ?? null; } },
+  set: (k, v) => { try { sessionStorage.setItem(k, v); } catch { mem[k] = v; } },
+  del: (k) => { try { sessionStorage.removeItem(k); } catch { delete mem[k]; } } };
+
+// ---------- API ----------
+let token = store.get('token'), me = null;
+let brand = { name: 'Cute Nails & Salons Kenya', tagline: '', logo: null };
+const logoImg = (cls, size) => brand.logo ? h('img', { src: brand.logo, alt: '', class: cls, style: `max-height:${size}px;max-width:${size * 2}px;object-fit:contain` }) : null;
+async function loadBrand() { try { const b = await api('GET', '/branding' + bq('?').replace('&', '?')); brand = { ...brand, ...b }; document.title = brand.name; } catch { /* keep defaults */ } }
+async function api(method, path, body, raw) {
+  const r = await fetch(path, { method, headers: { 'Content-Type': 'application/json', ...(token ? { Authorization: 'Bearer ' + token } : {}) }, body: body ? JSON.stringify(body) : undefined });
+  if (raw && r.ok) return r;
+  const t = await r.text(); let j = null; try { j = JSON.parse(t); } catch { /* not json */ }
+  if (!r.ok) {
+    if (r.status === 401 && token && path !== '/auth/login' && path !== '/auth/change-password') { signOut(); throw new Error('Your session ended. Please sign in again.'); }
+    throw new Error(j?.error?.message || 'Something went wrong (' + r.status + ')');
+  }
+  return j;
+}
+const can = (p) => me?.permissions.includes(p);
+const canAny = (...ps) => ps.some(can);
+// ---- branches: the menu has a branch switcher when the person works in more than one ----
+let activeBranch = null;                                           // a branch id, or 'all' (reports only)
+const branches = () => me?.branches?.length ? me.branches : (me?.branchIds || []).map((id) => ({ id, name: 'Branch ' + id }));
+const bq = (pre = '&') => (typeof activeBranch === 'number' ? `${pre}branchId=${activeBranch}` : '');
+const branchName = () => branches().find((b) => b.id === activeBranch)?.name || '';
+function needBranch(root) {          // screens that record data need one specific branch
+  if (typeof activeBranch === 'number') return false;
+  root.replaceChildren(h('div', { class: 'card' }, h('h2', {}, 'Choose a branch'), h('p', { class: 'muted' }, 'This screen records data for one branch. Pick a branch in the menu on the left (it is currently set to “All branches”).')));
+  return true;
+}
+function pickBranch() {
+  const list = branches(), saved = store.get('branch'), allowAll = list.length > 1 && canAny('dashboard.view', 'sales.view', 'commissions.view_all');
+  const want = saved === 'all' ? 'all' : Number(saved);
+  activeBranch = want === 'all' && allowAll ? 'all' : list.some((b) => b.id === want) ? want : (list[0]?.id ?? null);
+}
+function signOut() { token = null; me = null; store.del('token'); renderLogin(); }
+
+// ---------- login ----------
+function renderLogin(msg) {
+  const user = h('input', { type: 'text', autocomplete: 'username', autocapitalize: 'none', required: true });
+  const pass = h('input', { type: 'password', autocomplete: 'current-password', required: true });
+  const err = h('div', { class: 'err', hidden: !msg, role: 'alert' }, msg || '');
+  const btn = h('button', { class: 'primary', type: 'submit' }, 'Sign in');
+  const form = h('form', { class: 'card login', onsubmit: async (e) => {
+    e.preventDefault(); btn.disabled = true; err.hidden = true;
+    try {
+      const r = await api('POST', '/auth/login', { email: user.value.trim(), password: pass.value });
+      token = r.token; store.set('token', token); await start();
+    } catch (x) { err.textContent = x.message; err.hidden = false; btn.disabled = false; }
+  } },
+    logoImg('', 72), h('h1', {}, brand.name), h('div', { class: 'tag' }, brand.tagline || 'Sign in to continue'),
+    h('label', {}, 'Login name or email'), user, h('label', {}, 'Password'), pass, err, h('div', { style: 'margin-top:1rem' }, btn));
+  $app.replaceChildren(form); user.focus();
+}
+
+// ---------- shell ----------
+let tabs = [], current = null, view = null, prefill = null;
+async function start() {
+  if (!token) return renderLogin();
+  try { me = await api('GET', '/me'); } catch { return renderLogin(); }
+  pickBranch(); tabs = [];
+  if (can('dashboard.view')) tabs.push(['dash', 'Dashboard', viewDash]);
+  if (can('sales.create')) tabs.push(['sale', 'New sale', viewSale]);
+  if (canAny('appointments.view', 'appointments.view_own')) tabs.push(['appt', 'Appointments', viewAppointments]);
+  if (canAny('customers.view')) tabs.push(['cust', 'Customers', viewCustomers]);
+  if (can('customers.view')) { let n = 0; try { const d = await api('GET', '/customers/due'); n = d.counts.due + d.counts.at_risk; } catch { /* badge is optional */ } tabs.push(['due', n ? `Follow-ups (${n})` : 'Follow-ups', viewDue]); }
+  if (can('customers.view')) tabs.push(['loy', 'Loyalty', viewLoyalty]);
+  if (can('marketing.view')) tabs.push(['mkt', 'Campaigns', viewCampaigns]);
+  if (canAny('sales.view', 'sales.view_own')) tabs.push(['reports', can('sales.view') ? 'Sales reports' : 'My sales', viewReports]);
+  if (canAny('commissions.view_all', 'commissions.view_own')) tabs.push(['comm', can('commissions.view_all') ? 'Commissions' : 'My commission', viewCommission]);
+  if (can('inventory.view')) tabs.push(['inv', 'Inventory', viewInventory]);
+  if (can('expenses.view')) tabs.push(['exp', 'Expenses', viewExpenses]);
+  if (can('data.import')) tabs.push(['imp', 'Import history', viewImport]);
+  if (can('services.manage')) tabs.push(['svc', 'Services', viewServices]);
+  if (can('settings.business')) tabs.push(['set', 'Settings', viewSettings]);
+  if (can('staff.view')) tabs.push(['team', 'Staff', viewTeam]);
+  if (can('users.manage')) tabs.push(['staff', 'Staff logins', viewStaff]);
+  if (!tabs.length) { signOut(); return renderLogin('Your account has no screens yet. Ask the owner.'); }
+  current = tabs[0][0]; renderShell();
+}
+const ICONS = { dash: '📊', sale: '🧾', appt: '📅', cust: '👥', due: '🔔', loy: '⭐', mkt: '📣', reports: '📈', comm: '💰', inv: '📦', exp: '💸', imp: '⬆️', svc: '💅', set: '⚙️', staff: '🔑', team: '🧑‍🤝‍🧑' };
+function renderShell() {
+  view = h('main');
+  const shell = h('div', { class: 'shell' });
+  const close = () => shell.classList.remove('open');
+  const cur = tabs.find((t) => t[0] === current);
+  const nav = h('nav', { role: 'tablist', 'aria-label': 'Main menu' }, tabs.map(([id, label]) =>
+    h('button', { role: 'tab', 'aria-selected': id === current, onclick: () => { current = id; renderShell(); } }, h('span', { class: 'ico', 'aria-hidden': 'true' }, ICONS[id] || '•'), label)));
+  const bl = branches(), canAll = bl.length > 1 && canAny('dashboard.view', 'sales.view', 'commissions.view_all');
+  const switcher = bl.length > 1 ? h('div', { style: 'padding:0 1rem .6rem' }, h('label', { style: 'color:#ffffffb3;font-size:.8rem;margin:0' }, 'Branch'),
+    h('select', { 'aria-label': 'Branch', style: 'background:#ffffff1f;color:#fff;border-color:#ffffff66', onchange: (e) => { activeBranch = e.target.value === 'all' ? 'all' : Number(e.target.value); store.set('branch', String(activeBranch)); loadBrand().then(renderShell); } },
+      ...bl.map((b) => h('option', { value: b.id, selected: b.id === activeBranch, style: 'color:#000' }, b.name)), canAll && h('option', { value: 'all', selected: activeBranch === 'all', style: 'color:#000' }, 'All branches'))) : null;
+  const side = h('aside', { class: 'side' }, h('div', { class: 'brand' }, logoImg('', 44), h('div', {}, brand.name)), switcher, nav,
+    h('div', { class: 'who' }, h('div', {}, me.name), h('button', { onclick: changePassword }, 'Change password'), h('button', { onclick: signOut }, 'Sign out')));
+  const top = h('div', { class: 'topbar' }, h('button', { 'aria-label': 'Open menu', onclick: () => shell.classList.add('open') }, '☰'), h('span', { class: 'title' }, cur[1] + (bl.length > 1 ? ' · ' + (activeBranch === 'all' ? 'All branches' : branchName()) : '')));
+  shell.append(side, h('div', { class: 'scrim', onclick: close }), h('div', {}, top, view));
+  $app.replaceChildren(shell);
+  cur[2](view);
+}
+function modal(...kids) {
+  const bg = h('div', { class: 'modal-bg', onclick: (e) => { if (e.target === bg) bg.remove(); } }, h('div', { class: 'modal', role: 'dialog', 'aria-modal': 'true' }, kids));
+  document.body.append(bg); return bg;
+}
+function changePassword() {
+  const cur = h('input', { type: 'password', autocomplete: 'current-password' }), nw = h('input', { type: 'password', autocomplete: 'new-password' });
+  const msg = h('div', { hidden: true }); let m;
+  const go = h('button', { class: 'primary', onclick: async () => {
+    try { await api('POST', '/auth/change-password', { currentPassword: cur.value, newPassword: nw.value }); msg.className = 'ok'; msg.textContent = 'Password changed.'; msg.hidden = false; }
+    catch (x) { msg.className = 'err'; msg.textContent = x.message; msg.hidden = false; }
+  } }, 'Save new password');
+  m = modal(h('h2', {}, 'Change password'), h('label', {}, 'Current password'), cur, h('label', {}, 'New password (10+ characters, letters and numbers)'), nw, msg,
+    h('div', { class: 'row', style: 'margin-top:1rem' }, go, h('button', { onclick: () => m.remove() }, 'Close')));
+}
+
+// ---------- new sale ----------
+async function viewSale(root) {
+  if (needBranch(root)) return;
+  root.replaceChildren(h('p', { class: 'muted' }, 'Loading…'));
+  let services, techs;
+  try { [services, techs] = (await Promise.all([api('GET', '/services'), api('GET', '/technicians' + bq('?'))])).map((x) => x.rows); techs = techs.filter((t) => t.active); }
+  catch (x) { return root.replaceChildren(h('div', { class: 'err' }, x.message)); }
+  services = services.filter((s) => s.active); techs = techs.filter((t) => t.active);
+  const cats = [...new Set(services.map((s) => s.category))];
+  const S = { cart: [], cust: null, newName: '', newPhone: '', newBday: '', bday: undefined, bdayFor: null, addBday: '', consent: false, cat: 'ALL', q: '', discOn: false, discType: 'percent', discVal: '', discWhy: '',
+    pays: [{ method: 'mpesa', amount: '', ref: '' }], notes: '', error: '', busy: false, loy: null, loyFor: null, redeem: 0 };
+  const subtotal = () => S.cart.reduce((a, l) => a + l.svc.price, 0);
+  const discount = () => { if (!S.discOn) return 0; const v = Number(S.discVal) || 0, sub = subtotal(); return Math.min(S.discType === 'percent' ? Math.round(sub * v) / 100 : v, sub); };
+  const total = () => subtotal() - discount();
+  const paid = () => S.pays.reduce((a, p) => a + (Number(p.amount) || 0), 0);
+  const syncPay = () => { if (S.pays.length === 1) S.pays[0].amount = total() ? String(total()) : ''; };
+
+  const draw = () => {
+    const focus = document.activeElement?.dataset?.k, pos = document.activeElement?.selectionStart;
+    root.replaceChildren(h('div', { class: 'sale' }, left(), right()));
+    if (focus) { const el = root.querySelector(`[data-k="${focus}"]`); if (el) { el.focus(); try { el.setSelectionRange(pos, pos); } catch { /* not text */ } } }
+  };
+  const left = () => {
+    const shown = services.filter((s) => (S.cat === 'ALL' || s.category === S.cat) && s.name.toLowerCase().includes(S.q.toLowerCase()));
+    return h('section', { class: 'card' }, h('h2', {}, 'Services'),
+      h('input', { 'data-k': 'q', type: 'search', placeholder: 'Search services…', value: S.q, oninput: (e) => { S.q = e.target.value; draw(); } }),
+      h('div', { class: 'chips' }, ['ALL', ...cats].map((c) => h('button', { class: 'chip', 'aria-pressed': S.cat === c, onclick: () => { S.cat = c; draw(); } }, c === 'ALL' ? 'All' : c[0] + c.slice(1).toLowerCase()))),
+      h('div', { class: 'svc-grid' }, shown.map((s) => h('button', { class: 'svc', onclick: () => { S.cart.push({ svc: s, techId: '', mat: '', collab: false, collabId: '' }); syncPay(); draw(); } },
+        h('span', {}, s.name), h('span', { class: 'p' }, money(s.price))))), !shown.length && h('p', { class: 'muted' }, 'No services match.'));
+  };
+  const techOptions = (svc, cur) => {
+    const pref = techs.filter((t) => t.specialty === svc.category), rest = techs.filter((t) => t.specialty !== svc.category);
+    const opt = (t) => h('option', { value: t.id, selected: String(cur) === String(t.id) }, t.name);
+    return [h('option', { value: '' }, 'Choose technician…'), ...pref.map(opt),
+      rest.length && pref.length && h('option', { disabled: true }, '— other —'), ...rest.map(opt)];
+  };
+  const right = () => {
+    if (S.cust && S.bdayFor !== S.cust.id) { const id = S.cust.id; S.bdayFor = id; S.bday = undefined; S.addBday = ''; api('GET', `/customers/${id}`).then((c) => { if (S.cust?.id === id) { S.bday = c.birthday || null; draw(); } }).catch(() => {}); }
+    if (S.cust && S.loyFor !== S.cust.id) { const id = S.cust.id; S.loyFor = id; S.loy = null; api('GET', `/customers/${id}/loyalty`).then((l) => { if (S.cust?.id === id) { S.loy = l; draw(); } }).catch(() => {}); }
+    const useable = () => S.loy ? Math.min(S.loy.balance, Math.floor(subtotal() / S.loy.pointValue)) : 0;
+    const loyBox = S.cust && S.loy && S.loy.balance >= Math.max(S.loy.minRedeem, 1) ? h('div', { class: 'ok small', style: 'margin:.5rem 0' },
+      `${S.loy.balance} loyalty points (worth ${money(S.loy.value)}). `,
+      S.redeem ? [`Using ${S.redeem} points = ${money(S.redeem * S.loy.pointValue)} off. `, h('button', { class: 'link', onclick: () => { S.redeem = 0; S.discOn = false; S.discVal = ''; S.discWhy = ''; syncPay(); draw(); } }, 'Cancel')]
+        : useable() >= S.loy.minRedeem && subtotal() > 0 ? h('button', { onclick: () => { const pts = useable(); S.redeem = pts; S.discOn = true; S.discType = 'amount'; S.discVal = String(pts * S.loy.pointValue); S.discWhy = 'Loyalty points'; syncPay(); draw(); } }, 'Use points on this sale')
+        : h('span', { class: 'muted' }, 'Add services to use them.')) : null;
+    const custBox = S.cust
+      ? h('div', {}, h('div', { class: 'row' }, h('div', { class: 'grow' }, h('b', {}, S.cust.name), h('div', { class: 'small muted' }, S.cust.phone || 'no phone')), h('button', { onclick: () => { if (S.redeem) { S.discOn = false; S.discVal = ''; S.discWhy = ''; S.redeem = 0; syncPay(); } S.cust = null; draw(); } }, 'Change')), S.bday === null ? h('div', {}, h('label', {}, 'Birthday (optional, not printed on the receipt)'), h('input', { 'data-k': 'ab', type: 'date', max: new Date().toISOString().slice(0, 10), value: S.addBday, onchange: (e) => { S.addBday = e.target.value; } })) : (S.bday ? h('div', { class: 'small muted' }, 'Birthday on file') : null), loyBox)
+      : h('div', {}, h('input', { 'data-k': 'cs', type: 'search', placeholder: 'Search customer by name or phone…', oninput: debounce(async (e) => {
+            const v = e.target.value.trim(); const box = root.querySelector('#hits'); if (!box) return;
+            if (v.length < 2) return box.replaceChildren();
+            try { const r = (await api('GET', '/customers?q=' + encodeURIComponent(v))).rows;
+              box.replaceChildren(...(r.length ? [h('div', { class: 'pick' }, r.map((c) => h('button', { onclick: () => { S.cust = c; draw(); } }, h('b', {}, c.name), ' ', h('span', { class: 'muted small' }, c.phone || ''))))] : [h('div', { class: 'small muted' }, 'No match — fill in the new customer below.')]));
+            } catch (x) { box.replaceChildren(h('div', { class: 'err' }, x.message)); } }, 300) }),
+          h('div', { id: 'hits' }),
+          h('label', {}, 'New customer name'), h('input', { 'data-k': 'nn', value: S.newName, oninput: (e) => { S.newName = e.target.value; } }),
+          h('label', {}, 'Phone'), h('input', { 'data-k': 'np', type: 'tel', inputmode: 'tel', placeholder: '07XX XXX XXX', value: S.newPhone, oninput: (e) => { S.newPhone = e.target.value; } }),
+          h('label', {}, 'Birthday (optional, not printed on the receipt)'), h('input', { 'data-k': 'nb', type: 'date', max: new Date().toISOString().slice(0, 10), value: S.newBday, onchange: (e) => { S.newBday = e.target.value; } }),
+          h('label', { class: 'row', style: 'color:inherit;font-size:.9rem' }, h('input', { type: 'checkbox', style: 'width:auto;min-height:0', checked: S.consent, onchange: (e) => { S.consent = e.target.checked; } }), 'Customer agrees to receive offers and reminders'));
+    const lines = S.cart.length ? S.cart.map((l, i) => h('div', { class: 'line' },
+      h('div', { class: 'row' }, h('b', { class: 'grow' }, l.svc.name), h('span', {}, money(l.svc.price)), h('button', { class: 'link', 'aria-label': 'Remove ' + l.svc.name, onclick: () => { S.cart.splice(i, 1); syncPay(); draw(); } }, 'Remove')),
+      h('select', { 'aria-label': 'Technician for ' + l.svc.name, onchange: (e) => { l.techId = e.target.value; draw(); } }, techOptions(l.svc, l.techId)),
+      l.svc.category === 'HAIR' && h('label', { class: 'row', style: 'color:inherit;font-size:.9rem;margin:.3rem 0' }, h('input', { type: 'checkbox', style: 'width:auto;min-height:0', checked: !!l.collab, onchange: (e) => { l.collab = e.target.checked; if (!l.collab) l.collabId = ''; draw(); } }), 'Collabo: two hairdressers share this (commission split 50/50)'),
+      l.collab && h('select', { 'aria-label': 'Second hairdresser for ' + l.svc.name, onchange: (e) => { l.collabId = e.target.value; } }, techOptions(l.svc, l.collabId).filter((o) => !o || o.value === undefined || String(o.value) !== String(l.techId))),
+      l.svc.needsMaterials && h('div', {}, h('label', {}, 'Materials bought for this service (KSh) — type 0 if none'),
+        h('input', { 'data-k': 'mat' + i, type: 'number', min: '0', inputmode: 'decimal', placeholder: 'e.g. 600', value: l.mat, oninput: (e) => { l.mat = e.target.value; } })))) : [h('p', { class: 'muted' }, 'Tap a service to add it.')];
+    const disc = h('div', {}, h('label', { class: 'row', style: 'color:inherit;font-size:.9rem' }, h('input', { type: 'checkbox', style: 'width:auto;min-height:0', checked: S.discOn, onchange: (e) => { S.discOn = e.target.checked; syncPay(); draw(); } }), 'Give a discount'),
+      S.discOn && h('div', { class: 'row' },
+        h('select', { class: 'grow', onchange: (e) => { S.discType = e.target.value; syncPay(); draw(); } }, h('option', { value: 'percent', selected: S.discType === 'percent' }, 'Percent %'), h('option', { value: 'amount', selected: S.discType === 'amount' }, 'Amount KSh')),
+        h('input', { class: 'grow', 'data-k': 'dv', type: 'number', min: '0', inputmode: 'decimal', placeholder: 'Value', value: S.discVal, oninput: (e) => { S.discVal = e.target.value; syncPay(); updateTotals(); } }),
+        h('input', { style: 'flex:1 1 100%', 'data-k': 'dw', placeholder: 'Reason (required)', value: S.discWhy, oninput: (e) => { S.discWhy = e.target.value; } })));
+    const pays = S.pays.map((p, i) => h('div', { class: 'row', style: 'margin-top:.4rem' },
+      h('select', { class: 'grow', onchange: (e) => { p.method = e.target.value; } }, [['mpesa', 'M-Pesa'], ['cash', 'Cash'], ['card', 'Card'], ['bank', 'Bank']].map(([v, l]) => h('option', { value: v, selected: p.method === v }, l))),
+      h('input', { class: 'grow', 'data-k': 'pa' + i, type: 'number', min: '0', inputmode: 'decimal', value: p.amount, 'aria-label': 'Amount paid', oninput: (e) => { p.amount = e.target.value; updateTotals(); } }),
+      S.pays.length > 1 && h('button', { class: 'link', onclick: () => { S.pays.splice(i, 1); syncPay(); draw(); } }, 'Remove')));
+    return h('aside', { class: 'card panel' }, h('h2', {}, 'This sale'), custBox, h('h3', { style: 'margin-top:1rem' }, 'Services'), lines, disc,
+      h('div', { class: 'line' }, h('div', { class: 'row' }, h('span', { class: 'grow muted' }, 'Subtotal'), h('span', { id: 'sub' }, money(subtotal()))),
+        S.discOn && h('div', { class: 'row' }, h('span', { class: 'grow muted' }, 'Discount'), h('span', { id: 'dis' }, '− ' + money(discount()))),
+        h('div', { class: 'row' }, h('span', { class: 'grow' }, 'Total'), h('span', { class: 'total', id: 'tot' }, money(total())))),
+      h('h3', {}, 'Payment'), pays, h('div', { class: 'row', style: 'margin-top:.4rem' }, h('button', { class: 'link', onclick: () => { S.pays.push({ method: 'cash', amount: '', ref: '' }); draw(); } }, '+ Split payment'), h('span', { class: 'right small muted', id: 'rem' }, remText())),
+      h('label', {}, 'Notes about this sale (optional)'),
+      h('textarea', { 'data-k': 'notes', rows: '2', maxlength: '500', placeholder: 'e.g. customer will bring her own hair next time', value: S.notes, oninput: (e) => { S.notes = e.target.value; } }),
+      S.error && h('div', { class: 'err', role: 'alert' }, S.error),
+      h('button', { class: 'primary', style: 'width:100%;margin-top:.8rem', id: 'go', disabled: S.busy, onclick: submit }, S.busy ? 'Saving…' : 'Complete sale'));
+  };
+  const remText = () => { const r = total() - paid(); return r === 0 ? 'Paid in full' : r > 0 ? 'Still to pay ' + money(r) : 'Over by ' + money(-r); };
+  const updateTotals = () => { const set = (id, t) => { const e = root.querySelector('#' + id); if (e) e.textContent = t; };
+    set('sub', money(subtotal())); set('dis', '− ' + money(discount())); set('tot', money(total())); set('rem', remText());
+    const pa = root.querySelector('[data-k="pa0"]'); if (pa && S.pays.length === 1 && document.activeElement !== pa) pa.value = S.pays[0].amount; };
+  const submit = async () => {
+    S.error = '';
+    const missing = S.cart.findIndex((l) => !l.techId);
+    if (!S.cart.length) S.error = 'Add at least one service.';
+    else if (missing >= 0) S.error = 'Choose a technician for ' + S.cart[missing].svc.name + '.';
+    else if (S.cart.some((l) => l.collab && (!l.collabId || l.collabId === l.techId))) S.error = 'Collabo on ' + S.cart.find((l) => l.collab && (!l.collabId || l.collabId === l.techId)).svc.name + ': choose a second hairdresser, different from the first.';
+    else if (S.cart.some((l) => l.svc.needsMaterials && (l.mat === '' || !(Number(l.mat) >= 0)))) S.error = 'Enter the materials cost for ' + S.cart.find((l) => l.svc.needsMaterials && (l.mat === '' || !(Number(l.mat) >= 0))).svc.name + ' (type 0 if none).';
+    else if (!S.cust && !S.newName.trim()) S.error = 'Pick a customer or type a new customer name.';
+    else if (S.discOn && (!(Number(S.discVal) > 0) || !S.discWhy.trim())) S.error = 'Enter the discount value and a reason, or untick the discount.';
+    else if (Math.abs(total() - paid()) > 0.001) S.error = 'The payments must add up to the total. ' + remText() + '.';
+    if (S.error) return draw();
+    S.busy = true; draw();
+    const body = { branchId: activeBranch, lines: S.cart.map((l) => ({ kind: 'service', serviceId: l.svc.id, technicianId: Number(l.techId), ...(l.collab && l.collabId ? { collabTechnicianId: Number(l.collabId) } : {}), ...(l.mat !== '' ? { materialsCost: Number(l.mat) } : {}) })),
+      payments: S.pays.filter((p) => Number(p.amount) > 0).map((p) => ({ method: p.method, amount: Number(p.amount), reference: p.ref || undefined })) };
+    if (S.notes.trim()) body.notes = S.notes.trim();
+    if (S.appointmentId) body.appointmentId = S.appointmentId;
+    if (S.cust) body.customerId = S.cust.id; else body.newCustomer = { fullName: S.newName.trim(), phone: S.newPhone.trim() || undefined, birthday: S.newBday || undefined, consent: S.consent };
+    if (S.discOn) body.discounts = [{ type: S.discType, value: Number(S.discVal), reason: S.discWhy.trim() }];
+    try {
+      const r = await api('POST', '/sales', body);
+      let note = '';
+      const usedPts = S.redeem && S.loy ? Math.min(S.redeem, Math.ceil(discount() / S.loy.pointValue)) : 0;
+      if (usedPts > 0 && S.cust) { try { await api('POST', `/customers/${S.cust.id}/loyalty/redeem`, { points: usedPts }); } catch (e) { note = ' (points could not be deducted: ' + e.message + ')'; } }
+      if (S.cust && S.bday === null && S.addBday) { try { await api('PUT', `/customers/${S.cust.id}`, { birthday: S.addBday }); } catch (e) { note += ' (birthday not saved: ' + e.message + ')'; } }
+      showReceipt(r.transactionId, r.receiptNo + note);
+      viewSale(root);
+    } catch (x) { S.busy = false; S.error = x.message; draw(); }
+  };
+  if (prefill) {                       // coming from an appointment: customer, services and technician are pre-filled
+    const pf = prefill; prefill = null; S.cust = pf.cust; S.appointmentId = pf.appointmentId;
+    for (const sid of pf.serviceIds) { const sv = services.find((x) => x.id === sid); if (sv) S.cart.push({ svc: sv, techId: pf.techId ? String(pf.techId) : '', mat: '', collab: false, collabId: '' }); }
+  }
+  syncPay(); draw();
+}
+function debounce(fn, ms) { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; }
+async function showReceipt(id, no, review) {            // review = opened later from a report (not straight after the sale)
+  let m; const body = h('div', { class: 'receipt' }, 'Loading receipt ' + no + '…');
+  m = modal(h('div', { class: 'ok noprint' }, review ? 'Receipt ' + no : 'Sale saved. Receipt ' + no), body,
+    h('div', { class: 'row noprint', style: 'margin-top:1rem' }, h('button', { class: 'primary', onclick: () => window.print() }, review ? 'Print receipt' : 'Print'), h('button', { onclick: () => m.remove() }, review ? 'Close' : 'Done — next customer')));
+  try {
+    const r = await api('GET', '/sales/' + id + '/receipt');
+    const bi = r.businessInfo || { name: r.business };
+    body.replaceChildren(r.status === 'voided' && h('div', { class: 'err', style: 'text-align:center;font-weight:700' }, 'VOIDED'), review && h('div', { class: 'small', style: 'text-align:center' }, 'REPRINT'), bi.logo && h('img', { src: bi.logo, alt: '', style: 'max-height:56px;max-width:160px;object-fit:contain;display:block;margin:0 auto .3rem' }), h('b', {}, bi.name), bi.tagline && h('div', { class: 'small' }, bi.tagline), h('div', {}, r.branch), bi.address && h('div', { class: 'small' }, bi.address), (bi.phone || bi.email) && h('div', { class: 'small' }, [bi.phone, bi.email].filter(Boolean).join(' · ')), bi.taxPin && h('div', { class: 'small' }, 'PIN: ' + bi.taxPin), h('div', {}, 'Receipt ' + r.receipt_no), h('div', {}, new Date(r.occurred_at).toLocaleString('en-KE')),
+      h('div', {}, 'Customer: ' + r.customer), r.phone && can('customers.view') && h('div', { class: 'small' }, r.phone), h('hr'),
+      ...r.items.map((i) => h('div', { class: 'r' }, h('span', {}, i.description + (i.technician ? ' (' + i.technician + ')' : '')), h('span', {}, money(i.net_amount)))), h('hr'),
+      Number(r.discount_total) > 0 && h('div', { class: 'r' }, h('span', {}, 'Discount'), h('span', {}, '− ' + money(r.discount_total))),
+      h('div', { class: 'r' }, h('b', {}, 'Total'), h('b', {}, money(r.total))),
+      ...r.payments.map((p) => h('div', { class: 'r' }, h('span', {}, p.method), h('span', {}, money(p.amount)))), h('hr'), r.notes && h('div', {}, 'Note: ' + r.notes), h('div', {}, r.footer));
+  } catch (x) { body.textContent = 'Receipt saved as ' + no + ', but it could not be displayed: ' + x.message; }
+}
+
+// ---------- shared range picker ----------
+function rangeBar(state, reload, extra) {
+  const f = h('input', { type: 'date', value: state.from, 'aria-label': 'From', onchange: (e) => { state.from = e.target.value; reload(); } });
+  const t = h('input', { type: 'date', value: state.to, 'aria-label': 'To', onchange: (e) => { state.to = e.target.value; reload(); } });
+  const preset = (k, label) => h('button', { class: 'chip', onclick: () => { [state.from, state.to] = RANGES[k](); f.value = state.from; t.value = state.to; reload(); } }, label);
+  return h('div', { class: 'card row', style: 'margin-bottom:1rem' }, preset('today', 'Today'), preset('week', 'This week'), preset('last', 'Last week'), preset('month', 'This month'), preset('lastmonth', 'Last month'),
+    h('label', { style: 'margin:0' }, 'From'), h('div', { style: 'width:10.5rem' }, f), h('label', { style: 'margin:0' }, 'To'), h('div', { style: 'width:10.5rem' }, t), extra);
+}
+async function download(path, name) {
+  try { const r = await api('GET', path, null, true); const url = URL.createObjectURL(await r.blob()); const a = h('a', { href: url, download: name }); document.body.append(a); a.click(); a.remove(); URL.revokeObjectURL(url); }
+  catch (x) { alert(x.message); }
+}
+const table = (heads, rows, foot) => h('div', { class: 'scroll' }, h('table', {}, h('thead', {}, h('tr', {}, heads.map(([t, n]) => h('th', { class: n ? 'n' : '' }, t)))),
+  h('tbody', {}, rows.length ? rows.map((r) => h('tr', {}, r.map((c, i) => h('td', { class: heads[i][1] ? 'n' : '' }, c)))) : [h('tr', {}, h('td', { colspan: heads.length, class: 'muted' }, 'Nothing for these dates.'))]),
+  foot && h('tfoot', {}, h('tr', {}, foot.map((c, i) => h('td', { class: heads[i][1] ? 'n' : '' }, c))))));
+
+// ---------- dashboard ----------
+function viewDash(root) {
+  const st = { from: RANGES.week()[0], to: RANGES.week()[1] }; const out = h('div');
+  const tile = (label, value, hint) => h('div', { class: 'stat' }, label, h('b', {}, value), hint && h('span', { class: 'small muted' }, hint));
+  const load = async () => {
+    out.replaceChildren(h('p', { class: 'muted' }, 'Loading…'));
+    try {
+      const d = await api('GET', `/dashboard?from=${st.from}&to=${st.to}${bq()}`), k = d.kpi, t = d.target;
+      const pct = t.weeklySales ? t.thisWeek / t.weeklySales * 100 : 0;
+      const grid = h('div', { class: 'row', style: 'margin-bottom:1rem;align-items:stretch' });
+      grid.append(tile('Sales', money(k.sales)), tile('Unique customers', k.customers), tile('Services sold', k.services), tile('Avg spend / customer', money(k.avgSpend)),
+        tile('Services / customer', k.servicesPerCustomer.toFixed(1)), tile('New customers', k.newCustomers), tile('Returning', k.returningCustomers),
+        tile('Commission owed', money(k.commissionOwed), 'pending + approved, not yet paid'),
+        ...(k.inventoryValue != null ? [tile('Inventory value', money(k.inventoryValue))] : []),
+        tile('Est. operating profit', money(k.profit), 'sales − materials − commission − expenses'));
+      out.replaceChildren(h('p', { class: 'small muted' }, `${st.from} to ${st.to} (business week runs Saturday to Friday)`), grid,
+        h('div', { class: 'row', style: 'align-items:stretch' },
+          h('section', { class: 'card grow' }, h('h2', {}, 'Weekly target'),
+            t.weeklySales ? [h('p', {}, `${money(t.thisWeek)} of ${money(t.weeklySales)} · `, h('b', {}, pct.toFixed(1) + '%'), ` · gap ${money(t.thisWeek - t.weeklySales)}`),
+              h('div', { style: 'height:10px;background:var(--teal-l);border-radius:9px;overflow:hidden' }, h('div', { style: `height:100%;width:${Math.min(100, pct)}%;background:var(--coral)` }))]
+              : h('p', { class: 'muted' }, 'No weekly target set yet.'),
+            h('p', { class: 'small muted' }, `Last week: ${money(t.lastWeek)}`),
+            t.canSet && h('button', { onclick: async () => { const v = prompt('Weekly sales target in KSh', t.weeklySales || ''); if (v == null || v === '') return;
+              try { await api('PUT', '/targets/weekly', { salesTarget: Number(v) }); load(); } catch (x) { alert(x.message); } } }, t.weeklySales ? 'Change target' : 'Set weekly target')),
+          h('section', { class: 'card grow' }, h('h2', {}, 'Today'), h('p', {}, `${money(d.today.sales)} · ${d.today.customers} customers · ${d.today.services} services`),
+            h('h2', { style: 'margin-top:1rem' }, 'Alerts'),
+            d.alerts.lowStock.length ? h('p', {}, d.alerts.lowStock.map((x) => h('span', { class: 'err', style: 'display:inline-block;margin:.15rem;padding:.2rem .6rem' }, `Low: ${x.name} (${x.onHand})`))) : h('p', { class: 'muted' }, 'Stock levels are fine.'),
+            h('p', {}, `${d.alerts.commissionsPending} commission line(s) waiting for approval`))),
+        h('section', { class: 'card', style: 'margin-top:1rem' }, h('h2', {}, 'Technician performance'),
+          table([['Technician'], ['Services', 1], ['Revenue', 1], ['Commission', 1]], d.technicians.map((x) => [x.technician, x.services, money(x.revenue), money(x.commission)]))));
+    } catch (x) { out.replaceChildren(h('div', { class: 'err' }, x.message)); }
+  };
+  root.replaceChildren(rangeBar(st, load), out); load();
+}
+
+// ---------- reports ----------
+function viewReports(root) {
+  const st = { from: RANGES.week()[0], to: RANGES.week()[1] };
+  const out = h('div');
+  const load = async () => {
+    out.replaceChildren(h('p', { class: 'muted' }, 'Loading…'));
+    try {
+      const q = `?from=${st.from}&to=${st.to}${bq()}`;
+      const [w, d] = await Promise.all([api('GET', '/reports/weekly-sales' + q), api('GET', '/reports/daily-sales' + q)]);
+      out.replaceChildren(
+        h('div', { class: 'row', style: 'margin-bottom:1rem' }, h('div', { class: 'stat' }, 'Total sales', h('b', {}, money(w.total.totalSales))),
+          h('div', { class: 'stat' }, 'Customers served', h('b', {}, w.total.customersServed)), h('div', { class: 'stat' }, 'Commission earned', h('b', {}, money(w.total.commission)))),
+        h('section', { class: 'card', style: 'margin-bottom:1rem' }, h('div', { class: 'row' }, h('h2', { class: 'grow' }, 'Weekly summary'), can('data.export') && h('button', { onclick: () => download('/reports/weekly-sales' + q + '&format=csv', `weekly-sales-${st.from}_to_${st.to}.csv`) }, 'Download CSV')),
+          table([['Technician'], ['Customers', 1], ['Total sales', 1], ['Commission', 1]], w.rows.map((x) => [x.technician, x.customersServed, money(x.totalSales), money(x.commission)]),
+            ['Total', w.total.customersServed, money(w.total.totalSales), money(w.total.commission)])),
+        h('section', { class: 'card' }, h('div', { class: 'row' }, h('h2', { class: 'grow' }, 'Daily sales'), can('data.export') && h('button', { onclick: () => download('/reports/daily-sales' + q + '&format=csv', `daily-sales-${st.from}_to_${st.to}.csv`) }, 'Download CSV')),
+          table([['Date'], ['Receipt'], ['Technician'], ['Service'], ['Amount', 1], ['Materials', 1], ['Commission', 1], ['Paid by'], ['Customer'], ['Contact'], ['Notes']],
+            d.rows.map((x) => [x.date, x.transactionId && can('receipts.view') ? h('button', { class: 'link', style: 'white-space:nowrap', title: 'Open this sale', onclick: () => showReceipt(x.transactionId, x.receiptNo, true) }, x.receiptNo) : (x.receiptNo || ''), x.technician, x.service, money(x.amount), x.materials ? money(x.materials) : '–', money(x.commission), x.paymentMode, x.customer, x.contact || '', x.notes]),
+            ['', '', '', 'Total', money(d.total), money(d.totalMaterials), money(d.totalCommission), '', '', '', ''])));
+    } catch (x) { out.replaceChildren(h('div', { class: 'err' }, x.message)); }
+  };
+  root.replaceChildren(rangeBar(st, load), out); load();
+}
+
+// ---------- commission ----------
+async function showPayslip(technicianId, from, to) {
+  let m; const body = h('pre', { class: 'receipt', style: 'white-space:pre-wrap;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85rem' }, 'Loading payslip…'); let txt = '';
+  const save = h('button', { class: 'primary', disabled: true, onclick: () => { const url = URL.createObjectURL(new Blob([txt], { type: 'text/plain' })); const a = h('a', { href: url, download: `payslip-${save.dataset.name || 'technician'}-${from}_to_${to}.txt` }); document.body.append(a); a.click(); a.remove(); URL.revokeObjectURL(url); } }, 'Save payslip');
+  m = modal(body, h('div', { class: 'row noprint', style: 'margin-top:1rem' }, save, h('button', { onclick: () => window.print() }, 'Print'), h('button', { onclick: () => m.remove() }, 'Close')));
+  try {
+    const p = await api('GET', `/commissions/payslip?from=${from}&to=${to}&technicianId=${technicianId}${bq()}`);
+    const k = (n) => money(n).replace(/^KSh\s?/, 'Ksh ');
+    const bar = '-'.repeat(34), L = [];
+    L.push((p.business.name || '').toUpperCase(), 'COMMISSION PAYSLIP', bar, `Technician: ${p.technician}${p.specialty ? ' (' + p.specialty + ')' : ''}`, `Period: ${p.from} to ${p.to}`, `Generated: ${p.generated}`, bar);
+    for (const x of p.lines) L.push(`${x.date} ${x.service}${x.collab ? ' (collabo 50%)' : ''}${x.reversal ? ' (voided sale)' : ''}`, `  ${x.base} @ ${x.rate == null ? 'fixed' : Math.round(x.rate * 10000) / 100 + '%'} = ${x.commission}`);
+    if (!p.lines.length) L.push('No commission in this period.');
+    L.push(bar, `Services: ${p.services}`, `Sales: ${k(p.sales)}`, `Materials: ${k(p.materials)}`, `Total commission: ${k(p.total)}`, `Already paid: ${k(p.paid)}`, `Balance due: ${k(p.balance)}`, `Pending ${k(p.pending)} · Approved ${k(p.approved)}`, '', 'Approved by: ____________', 'Received by: ____________');
+    txt = L.join('\n');
+    body.replaceChildren(p.business.logo ? h('img', { src: p.business.logo, alt: '', style: 'max-height:48px;max-width:150px;object-fit:contain;display:block;margin:0 auto .3rem' }) : '', document.createTextNode(txt));
+    save.disabled = false; save.dataset.name = p.technician.replace(/[^A-Za-z0-9]+/g, '-');
+  } catch (x) { body.textContent = x.message; }
+}
+function viewCommission(root) {
+  const st = { from: RANGES.week()[0], to: RANGES.week()[1] }; const out = h('div'), flash = h('div');
+  const say = (ok, t) => { flash.className = ok ? 'ok' : 'err'; flash.textContent = t; flash.hidden = !t; };
+  const doApprove = async (e, technicianId, label) => {
+    if (!confirm(`Approve all pending commission for ${label}, ${st.from} to ${st.to}?`)) return;
+    e.target.disabled = true;
+    try { const r = await api('POST', '/commissions/approve', { from: st.from, to: st.to, ...(technicianId ? { technicianId } : {}), ...(typeof activeBranch === 'number' ? { branchId: activeBranch } : {}) });
+      await load(); say(true, r.approvedLines ? `Approved ${r.approvedLines} line(s), ${money(r.amount)}.` : 'Nothing was waiting for approval.'); }
+    catch (x) { say(false, x.message); e.target.disabled = false; }
+  };
+  const payDialog = (x) => {
+    const method = h('select', {}, [['mpesa', 'M-Pesa'], ['cash', 'Cash'], ['bank', 'Bank'], ['other', 'Other']].map(([v, l]) => h('option', { value: v }, l)));
+    const ref = h('input', { placeholder: 'M-Pesa code or reference (optional)' }), notes = h('input', { placeholder: 'Notes (optional)' }), msg = h('div', { class: 'err', hidden: true }); let m;
+    const go = h('button', { class: 'primary', onclick: async () => {
+      go.disabled = true;
+      try { const r = await api('POST', '/commissions/pay', { from: st.from, to: st.to, technicianId: x.technicianId, ...(typeof activeBranch === 'number' ? { branchId: activeBranch } : {}), method: method.value, ...(ref.value.trim() ? { reference: ref.value.trim() } : {}), ...(notes.value.trim() ? { notes: notes.value.trim() } : {}) });
+        m.remove(); await load(); say(true, `Paid ${money(r.amount)} to ${x.technician} (${r.lines} line(s), payment #${r.paymentId}).`); }
+      catch (e) { msg.textContent = e.message; msg.hidden = false; go.disabled = false; }
+    } }, 'Confirm payment');
+    m = modal(h('h2', {}, 'Pay ' + x.technician), h('p', {}, `${st.from} to ${st.to}: `, h('b', {}, money(x.approved)), ' approved and ready to pay.'), h('p', {}, h('b', {}, 'Send to: '), x.phone ? h('a', { href: 'tel:' + x.phone.replace(/[^0-9+]/g, '') }, x.phone) : h('span', { class: 'err' }, 'no phone on file. Add it under Staff first, then pay.')),
+      h('label', {}, 'Paid by'), method, h('label', {}, 'Reference'), ref, h('label', {}, 'Notes'), notes, msg,
+      h('div', { class: 'row', style: 'margin-top:1rem' }, go, h('button', { onclick: () => m.remove() }, 'Cancel')));
+  };
+  const load = async () => {
+    out.replaceChildren(h('p', { class: 'muted' }, 'Loading…'));
+    try {
+      const r = await api('GET', `/commissions/summary?from=${st.from}&to=${st.to}${bq()}`);
+      const sum = (k) => r.rows.reduce((a, x) => a + x[k], 0);
+      const canA = can('commissions.approve'), canP = can('commissions.pay');
+      const heads = [['Technician'], ['Total', 1], ['Pending', 1], ['Approved', 1], ['Paid', 1], ['']];
+      const rows = r.rows.map((x) => { const row = [h('span', {}, h('b', {}, x.technician), h('div', { class: 'small muted' }, x.phone ? h('a', { href: 'tel:' + x.phone.replace(/[^0-9+]/g, '') }, x.phone) : 'no phone on file (add it under Staff)')), money(x.total), money(x.pending), money(x.approved), money(x.paid)];
+        row.push(h('span', { class: 'row' }, h('button', { onclick: () => showPayslip(x.technicianId, st.from, st.to) }, 'Payslip'), canA && x.pending > 0 && h('button', { onclick: (e) => doApprove(e, x.technicianId, x.technician) }, 'Approve'),
+          canP && x.approved > 0 && h('button', { class: 'primary', onclick: () => payDialog(x) }, 'Pay ' + money(x.approved)))); return row; });
+      const foot = r.rows.length > 1 && ['Total', money(sum('total')), money(sum('pending')), money(sum('approved')), money(sum('paid')), ''];
+      out.replaceChildren(h('div', { class: 'row', style: 'margin-bottom:1rem' }, h('div', { class: 'stat' }, 'Total commission', h('b', {}, money(sum('total')))), h('div', { class: 'stat' }, 'Waiting for approval', h('b', {}, money(sum('pending')))),
+        h('div', { class: 'stat' }, 'Approved, not yet paid', h('b', {}, money(sum('approved')))), h('div', { class: 'stat' }, 'Paid', h('b', {}, money(sum('paid'))))),
+        h('section', { class: 'card' },
+          can('data.export') && h('div', { class: 'row', style: 'margin-bottom:.8rem' }, h('span', { class: 'muted small' }, 'Export (opens in Excel):'),
+            h('button', { onclick: () => download(`/commissions/lines?from=${st.from}&to=${st.to}&status=all&format=csv${bq()}`, `commissions-all-${st.from}_to_${st.to}.csv`) }, 'All commissions'),
+            h('button', { onclick: () => download(`/commissions/lines?from=${st.from}&to=${st.to}&status=approved&format=csv${bq()}`, `commissions-approved-${st.from}_to_${st.to}.csv`) }, 'Approved only')),
+          canA && sum('pending') > 0 && h('div', { style: 'margin-bottom:.8rem' }, h('button', { class: 'primary', onclick: (e) => doApprove(e, null, 'everyone') }, 'Approve all pending (' + money(sum('pending')) + ')')),
+          table(heads, rows, foot),
+          h('p', { class: 'small muted' }, 'Commission is worked out on the price after any discount. The business week runs Saturday to Friday. Approve first, then pay: paying settles every approved line in the dates shown.')));
+    } catch (x) { out.replaceChildren(h('div', { class: 'err' }, x.message)); }
+  };
+  flash.hidden = true;
+  root.replaceChildren(rangeBar(st, load), flash, out); load();
+}
+
+// ---------- import history (owner / admin) ----------
+function viewImport(root) {
+  const S = { file: null, b64: '', preview: null, busy: false };
+  const o = { branchId: typeof activeBranch === 'number' ? activeBranch : '', dateFormat: 'dmy', createServices: false, createTechnicians: false, skipInvalidRows: false, onOverlap: 'skip', paidBefore: '', unknownMaterials: 'error' };
+  const svcAlias = {}, techAlias = {};
+  const out = h('div'), batches = h('div'), msg = h('div', { hidden: true });
+  const say = (ok, t) => { msg.className = ok ? 'ok' : 'err'; msg.textContent = t; msg.hidden = !t; };
+  const options = () => ({ ...o, paidBefore: o.paidBefore || undefined, serviceAliases: svcAlias, technicianAliases: techAlias });
+  const body = () => ({ filename: S.file.name, contentBase64: S.b64, options: options() });
+  const fileIn = h('input', { type: 'file', accept: '.xlsx,.xls,.csv', onchange: (e) => {
+    const f = e.target.files[0]; S.file = null; S.preview = null; out.replaceChildren(); if (!f) return;
+    if (f.size > 9 * 1024 * 1024) { say(false, 'That file is too large (limit about 9 MB). Split it by year.'); return; }
+    const rd = new FileReader(); rd.onload = () => { S.file = f; S.b64 = String(rd.result).split(',')[1] || ''; say(true, 'File ready: ' + f.name); }; rd.readAsDataURL(f);
+  } });
+  const sel = (key, items) => h('select', { onchange: (e) => { o[key] = e.target.value; } }, items.map(([v, l]) => h('option', { value: v, selected: o[key] === v }, l)));
+  const chk = (key, label) => h('label', { class: 'row', style: 'gap:.5rem;margin:.3rem 0;font-weight:400' }, h('input', { type: 'checkbox', style: 'width:auto;min-height:0', checked: o[key] === true, onchange: (e) => { o[key] = e.target.checked; } }), label);
+  const paid = h('input', { type: 'date', onchange: (e) => { o.paidBefore = e.target.value; } });
+  const preview = async (e) => {
+    if (!S.file) return say(false, 'Choose a file first.');
+    e && (e.target.disabled = true); say(true, ''); out.replaceChildren(h('p', { class: 'muted' }, 'Reading the file…'));
+    try { S.preview = await api('POST', '/import/preview', body()); drawPreview(); } catch (x) { out.replaceChildren(); say(false, x.message); }
+    e && (e.target.disabled = false);
+  };
+  const aliasTable = (title, list, store, existingLabel) => list && list.length ? h('section', { class: 'card', style: 'margin-top:1rem' }, h('h2', {}, title),
+    h('p', { class: 'small muted' }, 'These names are in your file but not in the system. Pick the matching ' + existingLabel + ' (or leave blank), then press “Check again”.'),
+    table([['Name in file'], ['Rows', 1], ['Treat as']], list.slice(0, 40).map((u) => [u.name, u.count,
+      h('select', { onchange: (e) => { if (e.target.value) store[u.name] = e.target.value; else delete store[u.name]; } },
+        [h('option', { value: '' }, '— not matched —'), ...(u.suggestions || []).map((n) => h('option', { value: n, selected: store[u.name] === n }, n))])]))) : null;
+  const drawPreview = () => {
+    const p = S.preview;
+    if (!p.ok) return out.replaceChildren(h('div', { class: 'err' }, p.fatal || 'The file could not be read.'));
+    const m = p.summary, tile = (l, v, hint) => h('div', { class: 'stat' }, l, h('b', {}, v), hint && h('span', { class: 'small muted' }, hint));
+    const commit = h('button', { class: 'primary', disabled: !p.canCommit, onclick: async (e) => {
+      if (!confirm(`Import ${m.visits} visit(s) with revenue ${money(m.revenue)}? You can undo the whole batch afterwards.`)) return;
+      e.target.disabled = true;
+      try { const r = await api('POST', '/import/commit', body()); S.preview = null; out.replaceChildren(); say(true, `Imported batch #${r.batchId}: ${r.summary?.visits ?? m.visits} visit(s).`); loadBatches(); }
+      catch (x) { say(false, x.message); e.target.disabled = false; }
+    } }, p.canCommit ? 'Import now' : 'Cannot import yet');
+    out.replaceChildren(
+      h('section', { class: 'card' }, h('h2', {}, 'Preview — nothing has been saved yet'),
+        h('div', { class: 'row', style: 'margin-bottom:.8rem' }, tile('Visits', m.visits), tile('Service lines', m.serviceLines), tile('Revenue', money(m.revenue)), tile('Commission', money(m.commission), `${money(m.commissionMarkedPaid)} marked paid · ${money(m.commissionLeftPending)} pending`),
+          tile('Customers', `${m.customersMatched} known / ${m.customersNew} new`), tile('Dates', `${m.from || '—'} to ${m.to || '—'}`)),
+        m.rowsRejected > 0 && h('p', { class: 'err' }, `${m.rowsRejected} row(s) have problems.` + (p.needsSkipInvalidRows ? ' Tick “Skip rows with problems” above to import the rest, or fix the file.' : ' They will be skipped.')),
+        m.duplicatesSkipped > 0 && h('p', { class: 'small muted' }, m.duplicatesSkipped + ' duplicate row(s) will be skipped.'),
+        m.overlapsSkipped > 0 && h('p', { class: 'small muted' }, m.overlapsSkipped + ' visit(s) already exist in the system and will be skipped.'),
+        h('div', { class: 'row' }, commit, h('button', { onclick: preview }, 'Check again'))),
+      aliasTable('Unknown services', p.unknown.services, svcAlias, 'service'), aliasTable('Unknown technicians', p.unknown.technicians, techAlias, 'technician'),
+      p.unknown.products?.length ? h('section', { class: 'card', style: 'margin-top:1rem' }, h('h2', {}, 'Unknown materials'), h('p', { class: 'small muted' }, p.unknown.products.map((u) => `${u.name} (${u.count})`).join(', '))) : null,
+      p.errors.length ? h('section', { class: 'card', style: 'margin-top:1rem' }, h('h2', {}, 'Problems'), table([['Row', 1], ['Problem']], p.errors.map((e) => [e.row ?? '', e.message]))) : null,
+      p.warnings.length ? h('section', { class: 'card', style: 'margin-top:1rem' }, h('h2', {}, 'Warnings'), table([['Row', 1], ['Note']], p.warnings.slice(0, 50).map((e) => [e.row ?? '', e.message ?? String(e)]))) : null,
+      h('section', { class: 'card', style: 'margin-top:1rem' }, h('h2', {}, 'First visits in the file'),
+        table([['Date'], ['Customer'], ['Services'], ['Total', 1]], p.sample.map((v) => [v.date, v.customer, v.lines.map((l) => `${l.service} (${l.technician})`).join(', '), money(v.total)]))));
+  };
+  const loadBatches = async () => {
+    try {
+      const r = (await api('GET', '/import/batches')).rows;
+      batches.replaceChildren(table([['#', 1], ['File'], ['When'], ['Status'], ['Visits', 1], ['Revenue', 1], ['']], r.map((b) => [b.id, b.file_name, new Date(b.created_at).toLocaleString('en-KE'), b.status, b.summary?.visits ?? '', b.summary ? money(b.summary.revenue) : '',
+        b.status !== 'rolled_back' ? h('button', { class: 'link', onclick: async () => {
+          const why = prompt('Why are you undoing this import? (required)'); if (!why) return;
+          try { const x = await api('POST', `/import/${b.id}/rollback`, { reason: why }); say(true, `Batch #${b.id} undone: ${x.salesVoided} sale(s) cancelled.`); loadBatches(); } catch (e) { say(false, e.message); }
+        } }, 'Undo') : '']))); }
+    catch (x) { batches.replaceChildren(h('div', { class: 'err' }, x.message)); }
+  };
+  root.replaceChildren(
+    h('section', { class: 'card' }, h('h2', {}, 'Import past sales'),
+      h('p', { class: 'muted' }, 'Upload an Excel (.xlsx) or CSV file of past sales. You will see a preview first; nothing is saved until you press “Import now”, and a whole import can be undone later. Commission for weeks before the current one is recorded as already paid.'),
+      fileIn, h('div', { class: 'row', style: 'margin-top:.8rem' },
+        branches().length > 1 && h('div', {}, h('label', {}, 'Import these sales into'), h('select', { onchange: (e) => { o.branchId = e.target.value; } }, h('option', { value: '' }, '— use the Branch column in the file —'), ...branches().map((b) => h('option', { value: b.id, selected: o.branchId === b.id }, b.name)))),
+        h('div', {}, h('label', {}, 'Dates in the file look like'), sel('dateFormat', [['dmy', 'Day/Month/Year (31/12/2025)'], ['mdy', 'Month/Day/Year (12/31/2025)']])),
+        h('div', {}, h('label', {}, 'Visits already in the system'), sel('onOverlap', [['skip', 'Skip them'], ['import', 'Import anyway']])),
+        h('div', {}, h('label', {}, 'Commission paid before (optional)'), paid)),
+      chk('createServices', 'Add services that are not in the price list yet'), chk('createTechnicians', 'Add technicians that are not in the staff list yet'),
+      chk('skipInvalidRows', 'Skip rows with problems and import the rest'),
+      h('div', { style: 'margin-top:.8rem' }, h('button', { class: 'primary', onclick: preview }, 'Preview'))),
+    msg, out, h('section', { class: 'card', style: 'margin-top:1rem' }, h('h2', {}, 'Past imports'), batches));
+  loadBatches();
+}
+
+// ---------- services (add, edit, hide) + commission ----------
+function viewServices(root) {
+  const st = { q: '', showHidden: false }; let data;
+  const out = h('div'), list = h('div'), catBox = h('div');
+  const load = async () => {
+    try { data = await api('GET', '/services'); draw(); } catch (x) { list.replaceChildren(h('div', { class: 'err' }, x.message)); }
+  };
+  const catName = (code) => data.categories.find((c) => c.code === code)?.name || code;
+  const showComm = () => data.rows.some((r) => r.commission !== undefined) || data.categories.some((c) => c.commission !== undefined);
+  const fmtRule = (c) => !c ? '–' : c.calcType === 'percent_of_price' ? `${+(c.rate * 100).toFixed(2)}% of price` : c.calcType === 'percent_after_materials' ? `${+(c.rate * 100).toFixed(2)}% after materials` : c.calcType === 'fixed' ? `${money(c.fixed)} fixed` : 'Tiered';
+  const draw = () => {
+    const q = st.q.toLowerCase(), rows = data.rows.filter((r) => (st.showHidden || r.active) && (!q || r.name.toLowerCase().includes(q) || catName(r.category).toLowerCase().includes(q)));
+    const cats = [...new Set(rows.map((r) => r.category))].sort((a, b) => catName(a).localeCompare(catName(b)));
+    const sc = showComm(), heads = [['Service'], ['Price', 1], ['Minutes', 1], ...(sc ? [['Commission']] : []), ['Status'], ['']];
+    list.replaceChildren(...(cats.length ? cats.map((c) => h('section', { class: 'card', style: 'margin-bottom:1rem' }, h('h2', {}, catName(c)),
+      table(heads, rows.filter((r) => r.category === c).map((r) => [r.name, money(r.price), r.minutes, ...(sc ? [h('span', {}, fmtRule(r.commission), r.commission?.source === 'service' && h('span', { class: 'tag-pill', style: 'margin-left:.4rem' }, 'custom'))] : []), r.active ? 'On the menu' : 'Hidden', h('button', { class: 'link', onclick: () => editor(r) }, 'Edit')])))) : [h('p', { class: 'muted' }, 'No services match.')]));
+    catBox.replaceChildren(sc ? h('section', { class: 'card', style: 'margin-bottom:1rem' }, h('h2', {}, 'Commission by category'),
+      h('p', { class: 'small muted' }, 'The rule for every service in a category, unless a service has its own (set it under that service’s Edit).'),
+      table([['Category'], ['Commission'], ['']], data.categories.map((c) => [c.name, fmtRule(c.commission), data.canCommission ? h('button', { class: 'link', onclick: () => ruleDialog({ title: 'Commission for ' + c.name, scope: 'category', categoryId: c.id, current: c.commission }) }, 'Change') : '']))) : '');
+  };
+  // calculation type + value picker shared by the category and service dialogs
+  const ruleFields = (cur) => {
+    const type = h('select', {}, [['percent_of_price', 'Percent of the price (after discount)'], ['percent_after_materials', 'Percent after materials cost'], ['fixed', 'Fixed amount per service (KSh)']].map(([v, l]) => h('option', { value: v, selected: cur?.calcType === v }, l)));
+    const val = h('input', { type: 'number', min: '0', step: '0.01', inputmode: 'decimal', value: cur ? (cur.calcType === 'fixed' ? cur.fixed : +(cur.rate * 100).toFixed(2)) : '' });
+    const lab = h('label', {}, ''); const sync = () => { lab.textContent = type.value === 'fixed' ? 'Amount (KSh)' : 'Percent (%)'; }; type.onchange = sync; sync();
+    const body = () => type.value === 'fixed' ? { calcType: 'fixed', fixedAmount: Number(val.value) } : { calcType: type.value, rate: Number(val.value) / 100 };
+    return { type, val, el: h('div', {}, h('label', {}, 'How commission is worked out'), type, lab, val), body };
+  };
+  const today = () => iso(new Date());
+  const ruleDialog = ({ title, scope, categoryId, current }) => {
+    const f = ruleFields(current), from = h('input', { type: 'date', value: today() }), msg = h('div', { class: 'err', hidden: true }); let m;
+    m = modal(h('h2', {}, title), f.el, h('label', {}, 'Starts from'), from, h('p', { class: 'small muted' }, 'Sales on or after this date use the new rule. Commission already worked out for earlier sales does not change.'), msg,
+      h('div', { class: 'row', style: 'margin-top:1rem' }, h('button', { class: 'primary', onclick: async (e) => { e.target.disabled = true;
+        try { await api('POST', '/commission-rules', { scope, categoryId, ...f.body(), effectiveFrom: from.value, reason: title }); m.remove(); load(); } catch (x) { msg.textContent = x.message; msg.hidden = false; e.target.disabled = false; } } }, 'Save'), h('button', { onclick: () => m.remove() }, 'Cancel')));
+  };
+  const editor = (r) => {
+    const isNew = !r, name = h('input', { value: r?.name || '', maxlength: 80, placeholder: 'e.g. Acrylic refill' });
+    const cat = h('select', {}, data.categories.map((c) => h('option', { value: c.code, selected: c.code === (r?.category || '') }, c.name)));
+    const price = h('input', { type: 'number', min: '0', inputmode: 'decimal', value: r ? r.price : '', disabled: !isNew && !data.canPrice });
+    const mins = h('input', { type: 'number', min: '5', max: '600', value: r ? r.minutes : 60 });
+    const why = h('input', { placeholder: 'e.g. New price list from November' }), whyRow = h('div', { hidden: true }, h('label', {}, 'Reason for the price change (required)'), why);
+    const active = h('input', { type: 'checkbox', style: 'width:auto;min-height:0', checked: r ? r.active : true });
+    const msg = h('div', { class: 'err', hidden: true }); let m;
+    const hasOwn = r?.commission?.source === 'service';
+    const mode = h('select', {}, h('option', { value: 'default', selected: !hasOwn }, 'Use the category rule'), h('option', { value: 'custom', selected: hasOwn }, 'Custom rule for this service'));
+    const cf = ruleFields(hasOwn ? r.commission : null), from = h('input', { type: 'date', value: today() });
+    const custom = h('div', { hidden: !hasOwn }, cf.el, h('label', {}, 'Starts from'), from);
+    mode.onchange = () => { custom.hidden = mode.value !== 'custom'; };
+    const commBox = data.canCommission ? h('section', { class: 'card', style: 'margin-top:.8rem' }, h('h3', {}, 'Commission'),
+      !isNew && h('p', { class: 'small muted' }, 'Currently: ' + fmtRule(r.commission) + (hasOwn ? ' (custom)' : ' (category rule)')), mode, custom) : null;
+    price.addEventListener('input', () => { whyRow.hidden = isNew || Number(price.value) === r.price; });
+    const save = async (e) => {
+      e.target.disabled = true; msg.hidden = true;
+      try {
+        let id = r?.id;
+        if (isNew) id = (await api('POST', '/services', { name: name.value, category: cat.value, price: Number(price.value), minutes: Number(mins.value) })).id;
+        else { const body = { name: name.value, category: cat.value, minutes: Number(mins.value), active: active.checked };
+          if (Number(price.value) !== r.price) { body.price = Number(price.value); body.reason = why.value; }
+          await api('PUT', '/services/' + id, body); }
+        if (data.canCommission) {
+          const label = 'Commission for ' + name.value;
+          if (mode.value === 'custom') await api('POST', '/commission-rules', { scope: 'service', serviceId: id, ...cf.body(), effectiveFrom: from.value, reason: label });
+          else if (hasOwn) await api('POST', '/commission-rules/clear', { serviceId: id, effectiveFrom: from.value, reason: label + ': back to category rule' });
+        }
+        m.remove(); load();
+      } catch (x) { msg.textContent = x.message; msg.hidden = false; e.target.disabled = false; }
+    };
+    m = modal(h('h2', {}, isNew ? 'Add a service' : 'Edit service'), h('label', {}, 'Service name'), name, h('label', {}, 'Category'), cat,
+      h('div', { class: 'row' }, h('div', { class: 'grow' }, h('label', {}, 'Price (KSh)'), price), h('div', { class: 'grow' }, h('label', {}, 'Duration (minutes)'), mins)), whyRow,
+      !isNew && h('label', { class: 'row', style: 'color:inherit;margin-top:.6rem' }, active, 'Show on the menu (untick to hide it from new sales)'), commBox,
+      h('p', { class: 'small muted' }, 'Changes apply to new sales only; past sales keep what they were sold at. A service paid “after materials” asks for the materials cost when it is sold.'), msg,
+      h('div', { class: 'row', style: 'margin-top:1rem' }, h('button', { class: 'primary', onclick: save }, 'Save'), h('button', { onclick: () => m.remove() }, 'Cancel')));
+    name.focus();
+  };
+  root.replaceChildren(out);
+  out.append(h('div', { class: 'row', style: 'margin-bottom:1rem' }, h('button', { class: 'primary', onclick: () => data && editor(null) }, 'Add a service'),
+    h('div', { class: 'grow', style: 'min-width:200px' }, h('input', { type: 'search', placeholder: 'Search services…', oninput: (e) => { st.q = e.target.value; if (data) draw(); } })),
+    h('label', { class: 'row', style: 'margin:0;font-weight:400;gap:.4rem' }, h('input', { type: 'checkbox', style: 'width:auto;min-height:0', onchange: (e) => { st.showHidden = e.target.checked; if (data) draw(); } }), 'Show hidden')), catBox, list);
+  load();
+}
+
+// ---------- settings (owner / admin) ----------
+function viewSettings(root) {
+  const out = h('div'); let scope = '';
+  const scopeBar = h('div');
+  const DAYN = [['mon', 'Monday'], ['tue', 'Tuesday'], ['wed', 'Wednesday'], ['thu', 'Thursday'], ['fri', 'Friday'], ['sat', 'Saturday'], ['sun', 'Sunday']];
+  const save = async (body, msg, after) => {
+    try { const b = await api('PUT', '/settings/business', { ...body, ...(scope ? { branchId: Number(scope) } : {}) }); msg.className = 'ok'; msg.textContent = 'Saved.'; msg.hidden = false; if (!scope || Number(scope) === activeBranch) { brand = { ...brand, name: b.name, tagline: b.tagline, logo: b.logo, hours: b.hours }; document.title = brand.name; } if (after) after(b); }
+    catch (x) { msg.className = 'err'; msg.textContent = x.message; msg.hidden = false; }
+  };
+  const resizeLogo = (file) => new Promise((resolve, reject) => {
+    // read the file as a data: address (the page's security rules allow data: pictures but not blob: ones)
+    const rd = new FileReader();
+    rd.onerror = () => reject(new Error('That file could not be opened. Try another picture.'));
+    rd.onload = () => {
+      const img = new Image();
+      img.onload = () => { const k = Math.min(1, 400 / Math.max(img.width, img.height)), c = document.createElement('canvas'); c.width = Math.max(1, Math.round(img.width * k)); c.height = Math.max(1, Math.round(img.height * k));
+        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height); resolve(c.toDataURL('image/png')); };
+      img.onerror = () => reject(new Error('That file could not be read as a picture. Use a PNG or JPG.'));
+      img.src = String(rd.result);
+    };
+    rd.readAsDataURL(file);
+  });
+  const load = async () => {
+    try {
+      const b = await api('GET', '/settings/business' + (scope ? '?branchId=' + scope : ''));
+      const ov = (k) => (b.overridden || []).includes(k);
+      const f = (v, ph) => h('input', { value: v || '', placeholder: ph || '' }), t = { name: f(b.name), tagline: f(b.tagline, 'e.g. Beauty you can feel'), phone: f(b.phone, '07XX XXX XXX'), whatsapp: f(b.whatsapp, 'WhatsApp number'), email: f(b.email, 'name@example.com'),
+        address: f(b.address, 'Street, building, town'), website: f(b.website), instagram: f(b.instagram, '@yourhandle'), taxPin: f(b.taxPin, 'optional'), receiptFooter: f(b.receiptFooter) };
+      const m1 = h('div', { hidden: true }), m2 = h('div', { hidden: true }), m3 = h('div', { hidden: true }), m4 = h('div', { hidden: true }), m5 = h('div', { hidden: true });
+      let logo = b.logo; const prev = h('div', { style: 'min-height:72px;display:flex;align-items:center' });
+      const showLogo = () => prev.replaceChildren(logo ? h('img', { src: logo, alt: 'Logo', style: 'max-height:72px;max-width:220px;object-fit:contain;background:#fff;border:1px solid var(--line);border-radius:10px;padding:.3rem' }) : h('span', { class: 'muted' }, 'No logo yet'));
+      showLogo();
+      const file = h('input', { type: 'file', accept: 'image/png,image/jpeg,image/webp', onchange: async (e) => { const fl = e.target.files[0]; if (!fl) return; try { logo = await resizeLogo(fl); showLogo(); m1.hidden = true; } catch (x) { m1.className = 'err'; m1.textContent = x.message; m1.hidden = false; } } });
+      const hrs = {}; DAYN.forEach(([k]) => { const x = b.hours[k]; hrs[k] = { closed: h('input', { type: 'checkbox', style: 'width:auto;min-height:0', checked: !!x.closed }), open: h('input', { type: 'time', value: x.open }), close: h('input', { type: 'time', value: x.close }) }; });
+      const rl = Object.fromEntries(Object.entries(b.rules).map(([k, v]) => [k, h('input', { type: 'number', min: '0', value: v })]));
+      const fld = (l, el, hint) => h('div', { style: 'flex:1 1 240px' }, h('label', {}, l), el, hint && h('div', { class: 'small muted' }, hint));
+      const bl = branches();
+      scopeBar.replaceChildren(bl.length > 1 ? h('section', { class: 'card', style: 'margin-bottom:1rem' }, h('label', {}, 'These settings apply to'),
+        h('select', { onchange: (e) => { scope = e.target.value; load(); } }, h('option', { value: '', selected: !scope }, 'All branches (the default)'), ...bl.map((x) => h('option', { value: String(x.id), selected: String(x.id) === scope }, x.name + ' only'))),
+        h('div', { class: 'small muted' }, scope ? 'Name, logo, contact details, receipt wording and opening hours for this branch only. Anything you leave the same as the default keeps following the default. Customer status rules are for the whole business.' : 'Used by every branch that does not have its own.')) : null);
+      out.replaceChildren(
+        h('section', { class: 'card', style: 'margin-bottom:1rem' }, h('h2', {}, 'Salon profile' + (b.overridden?.length ? ' (has branch-specific values)' : '')),
+          h('label', {}, 'Logo'), prev, h('div', { class: 'row', style: 'margin-top:.4rem' }, h('div', { style: 'flex:1 1 240px' }, file), h('button', { onclick: () => { logo = null; showLogo(); } }, 'Remove logo')),
+          h('div', { class: 'small muted' }, 'PNG or JPG. It is shrunk automatically. Shown on the sign-in page, the menu and receipts.'),
+          h('div', { class: 'row', style: 'margin-top:.6rem' }, fld('Salon name', t.name), fld('Tagline', t.tagline)),
+          h('div', { class: 'row' }, fld('Phone', t.phone), fld('WhatsApp', t.whatsapp), fld('Email', t.email)),
+          h('div', { class: 'row' }, fld('Address', t.address), fld('Website', t.website), fld('Instagram', t.instagram)), m1,
+          h('button', { class: 'primary', style: 'margin-top:.6rem', onclick: () => save({ ...Object.fromEntries(Object.entries(t).filter(([k]) => k !== 'receiptFooter' && k !== 'taxPin').map(([k, el]) => [k, el.value])), logo }, m1, () => document.querySelector('aside.side .brand')?.replaceChildren(logoImg('', 44), h('div', {}, brand.name))) }, 'Save profile')),
+        h('section', { class: 'card', style: 'margin-bottom:1rem' }, h('h2', {}, 'Receipts'),
+          h('div', { class: 'row' }, fld('Message at the bottom of receipts', t.receiptFooter), fld('Tax PIN (optional)', t.taxPin, 'Printed on receipts if filled in')), m2,
+          h('button', { class: 'primary', style: 'margin-top:.6rem', onclick: () => save({ receiptFooter: t.receiptFooter.value, taxPin: t.taxPin.value }, m2) }, 'Save receipt settings')),
+        h('section', { class: 'card', style: 'margin-bottom:1rem' }, h('h2', {}, 'Opening hours'),
+          h('div', { class: 'scroll' }, h('table', {}, h('tbody', {}, DAYN.map(([k, l]) => h('tr', {}, h('td', {}, l), h('td', {}, h('label', { class: 'row', style: 'margin:0;font-weight:400;gap:.4rem' }, hrs[k].closed, 'Closed')), h('td', {}, hrs[k].open), h('td', {}, hrs[k].close)))))), m3,
+          h('button', { class: 'primary', style: 'margin-top:.6rem', onclick: () => save({ hours: Object.fromEntries(DAYN.map(([k]) => [k, { closed: hrs[k].closed.checked, open: hrs[k].open.value, close: hrs[k].close.value }])) }, m3) }, 'Save opening hours')),
+        scope ? null : h('section', { class: 'card' }, h('h2', {}, 'Customer status rules'),
+          h('p', { class: 'muted' }, 'These decide when a customer counts as Due, Lapsed, Win-back and so on, and who is a VIP. They change the Customers, Follow-ups and Campaigns screens straight away.'),
+          h('div', { class: 'row' }, fld('Usual return time for new customers (days)', rl.defaultReturnDays, 'Used until a customer has 3 visits'), fld('Lapsed after (days)', rl.lapsedDays), fld('Win-back after (days)', rl.winbackDays), fld('Inactive after (days)', rl.inactiveDays)),
+          h('div', { class: 'row' }, fld('VIP: lifetime spend from (KSh)', rl.vipMinSpend), fld('VIP: or visits from', rl.vipMinVisits)), m4,
+          h('button', { class: 'primary', style: 'margin-top:.6rem', onclick: () => save({ rules: Object.fromEntries(Object.entries(rl).map(([k, el]) => [k, Number(el.value)])) }, m4) }, 'Save status rules')));
+    } catch (x) { out.replaceChildren(h('div', { class: 'err' }, x.message)); }
+  };
+  root.replaceChildren(scopeBar, out); load();
+}
+
+// ---------- staff logins (owner / admin) ----------
+// ---------- staff profiles ----------
+function readPicture(file, max = 1100) {            // shrinks a phone photo so it stays well under the 500 KB limit
+  return new Promise((ok, fail) => {
+    const bad = () => fail(new Error('That file could not be read as a picture. Use a PNG or JPG.'));
+    const fr = new FileReader(); fr.onerror = bad;
+    fr.onload = () => { const img = new Image(); img.onerror = bad;
+      img.onload = () => { const k = Math.min(1, max / Math.max(img.width, img.height)), c = document.createElement('canvas'); c.width = Math.round(img.width * k); c.height = Math.round(img.height * k);
+        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height); let q = 0.8, d = c.toDataURL('image/jpeg', q); while (d.length * 0.75 > 450 * 1024 && q > 0.3) { q -= 0.1; d = c.toDataURL('image/jpeg', q); } ok(d); };
+      img.src = fr.result; };
+    fr.readAsDataURL(file);
+  });
+}
+function viewTeam(root) {
+  const todayIso = () => new Date().toLocaleDateString('en-CA', { timeZone: 'Africa/Nairobi' });
+  const list = async () => {
+    root.replaceChildren(h('p', { class: 'muted' }, 'Loading…'));
+    try {
+      const d = await api('GET', '/staff?' + bq('').replace(/^&/, ''));
+      root.replaceChildren(h('section', { class: 'card' }, h('p', { class: 'small muted' }, 'Tap a name to open the profile: contact details, lifetime sales, top services and absences.'),
+        table([['Name'], ['Branch'], ['Phone'], ['Employed since'], ['Lifetime sales', 1], ['Customers', 1], ['Absences (90 days)', 1], ['Status']],
+          d.rows.map((x) => [h('button', { class: 'link', onclick: () => profile(x.id) }, x.name), x.branch, x.phone || h('span', { class: 'muted' }, 'add phone'), x.hiredOn || '–', money(x.lifetimeSales), x.customers, x.absences90, x.active ? 'Active' : h('span', { class: 'muted' }, 'Left')]))));
+    } catch (x) { root.replaceChildren(h('div', { class: 'err' }, x.message)); }
+  };
+  const profile = async (id) => {
+    root.replaceChildren(h('p', { class: 'muted' }, 'Loading…'));
+    let p; try { p = await api('GET', '/staff/' + id); } catch (x) { root.replaceChildren(h('div', { class: 'err' }, x.message), h('button', { onclick: list }, 'Back')); return; }
+    const flash = h('div', { hidden: true }), say = (ok, t) => { flash.className = ok ? 'ok' : 'err'; flash.textContent = t; flash.hidden = false; };
+    const save = async (body, msg) => { try { await api('PUT', '/staff/' + id, body); await profile(id); } catch (x) { say(false, x.message); } };
+    const name = h('input', { value: p.name }), phone = h('input', { type: 'tel', value: p.phone || '', placeholder: '07XX XXX XXX (for mobile money payments)' }), email = h('input', { type: 'email', value: p.email || '' }),
+      nid = h('input', { value: p.nationalId || '', placeholder: 'National ID number' }), hired = h('input', { type: 'date', value: p.hiredOn || '', max: todayIso() }), active = h('input', { type: 'checkbox', checked: p.active, style: 'width:auto;min-height:0' });
+    const details = p.canManage
+      ? h('section', { class: 'card' }, h('h2', {}, 'Details'), h('div', { class: 'row' }, h('div', { class: 'grow' }, h('label', {}, 'Name'), name), h('div', { class: 'grow' }, h('label', {}, 'Phone'), phone)),
+          h('div', { class: 'row' }, h('div', { class: 'grow' }, h('label', {}, 'Email'), email), h('div', { class: 'grow' }, h('label', {}, 'ID number'), nid), h('div', { class: 'grow' }, h('label', {}, 'Date of employment'), hired)),
+          h('label', { class: 'row', style: 'color:inherit' }, active, 'Currently working here (untick when they leave; their history is kept)'),
+          h('button', { class: 'primary', style: 'margin-top:.6rem', onclick: () => save({ displayName: name.value, phone: phone.value, email: email.value, nationalId: nid.value, hiredOn: hired.value, active: active.checked }) }, 'Save details'))
+      : h('section', { class: 'card' }, h('h2', {}, 'Details'), h('p', {}, 'Phone: ' + (p.phone || '–')), h('p', {}, 'Email: ' + (p.email || '–')), h('p', {}, 'Employed since: ' + (p.hiredOn || '–')));
+    const pic = h('input', { type: 'file', accept: 'image/*', hidden: true, onchange: async (e) => { const f = e.target.files[0]; if (!f) return; try { await save({ idPhoto: await readPicture(f) }); } catch (x) { say(false, x.message); } } });
+    const idBox = p.canManage ? h('section', { class: 'card' }, h('h2', {}, 'ID picture'), h('p', { class: 'small muted' }, 'Only people who manage staff can see this. Take a clear photo of the ID card, front side.'),
+      h('div', { class: 'row' }, pic, h('button', { class: 'primary', onclick: () => pic.click() }, p.hasIdPhoto ? 'Replace picture' : 'Upload picture'),
+        p.hasIdPhoto && h('button', { onclick: async () => { try { const r = await api('GET', `/staff/${id}/id-photo`); let m; m = modal(h('h2', {}, p.name + ' — ID'), h('img', { src: r.photo, alt: 'ID card', style: 'max-width:100%;border-radius:8px' }), h('div', { class: 'row noprint', style: 'margin-top:1rem' }, h('button', { onclick: () => m.remove() }, 'Close'))); } catch (x) { say(false, x.message); } } }, 'View picture'),
+        p.hasIdPhoto && h('button', { class: 'link', onclick: () => { if (confirm('Remove the ID picture?')) save({ idPhoto: null }); } }, 'Remove'))) : null;
+    const L = p.lifetime, tile = (t, v, sub) => h('div', { class: 'stat' }, t, h('b', {}, v), sub && h('span', { class: 'small muted' }, sub));
+    const stats = h('div', { class: 'row', style: 'margin:1rem 0' }, tile('Lifetime sales', money(L.sales), L.since ? 'since ' + L.since : ''), tile('Customers served', L.customers, 'different people'), tile('Services done', L.services), tile('Visits', L.visits));
+    const top = h('section', { class: 'card' }, h('h2', {}, 'Known for'), p.topServices.length ? table([['Service'], ['Times', 1], ['Sales', 1]], p.topServices.map((x) => [x.service, x.times, money(x.revenue)])) : h('p', { class: 'muted' }, 'No sales recorded yet.'));
+    const aDate = h('input', { type: 'date', value: todayIso(), max: todayIso() }), aKind = h('select', {}, Object.entries(p.kinds).map(([v, l]) => h('option', { value: v }, l))), aWhy = h('input', { placeholder: 'Reason (optional)' });
+    const abs = h('section', { class: 'card' }, h('h2', {}, 'Absences'), h('p', { class: 'small muted' }, `${p.absencesLast90} in the last 90 days · ${p.absencesThisYear} this year (late arrivals not counted)`),
+      p.canManage && h('div', { class: 'row', style: 'margin-bottom:.8rem' }, h('div', {}, h('label', {}, 'Date'), aDate), h('div', {}, h('label', {}, 'Type'), aKind), h('div', { class: 'grow' }, h('label', {}, 'Reason'), aWhy),
+        h('button', { class: 'primary', onclick: async () => { try { await api('POST', `/staff/${id}/absences`, { date: aDate.value, kind: aKind.value, reason: aWhy.value }); await profile(id); } catch (x) { say(false, x.message); } } }, 'Record absence')),
+      table([['Date'], ['Type'], ['Reason'], ['Recorded by'], ...(p.canManage ? [['']] : [])], p.absences.map((a) => [a.date, p.kinds[a.kind] || a.kind, a.reason, a.by || '',
+        ...(p.canManage ? [h('button', { class: 'link', onclick: async () => { if (!confirm('Remove this absence record?')) return; try { await api('DELETE', `/staff/${id}/absences/${a.id}`); await profile(id); } catch (x) { say(false, x.message); } } }, 'Remove')] : [])])));
+    root.replaceChildren(h('div', { class: 'row', style: 'margin-bottom:.6rem' }, h('button', { onclick: list }, '← All staff'), h('h2', { class: 'grow', style: 'margin:0' }, p.name), h('span', { class: 'muted' }, [p.branch, p.specialty].filter(Boolean).join(' · '))),
+      flash, stats, h('div', { style: 'display:grid;gap:1rem' }, details, idBox, top, abs));
+  };
+  list();
+}
+function viewStaff(root) {
+  const out = h('div'), msg = h('div');
+  const load = async () => {
+    try {
+      const u = (await api('GET', '/users')).rows;
+      out.replaceChildren(table([['Name'], ['Login'], ['Role'], ['Active'], ['Last login'], ['']], u.map((x) => [x.name, x.email, x.role, x.active ? 'Yes' : 'No', x.lastLogin ? new Date(x.lastLogin).toLocaleString('en-KE') : 'never',
+        h('button', { class: 'link', onclick: async () => { if (!confirm('Set a new temporary password for ' + x.name + '?')) return; try { const r = await api('POST', `/users/${x.id}/reset-password`, {}); showLogins([{ technician: x.name, login: r.login, password: r.password }]); } catch (e) { alert(e.message); } } }, 'Reset password')])));
+    } catch (e) { out.replaceChildren(h('div', { class: 'err' }, e.message)); }
+  };
+  const showLogins = (rows) => { let m; m = modal(h('h2', {}, 'Logins — write these down now'), h('p', { class: 'small muted' }, 'Passwords are shown only once. Give each person their own, and ask them to change it after signing in.'),
+    table([['Name'], ['Login name'], ['Password']], rows.map((r) => [r.technician, r.login, h('code', {}, r.password)])), h('div', { class: 'row noprint', style: 'margin-top:1rem' }, h('button', { class: 'primary', onclick: () => window.print() }, 'Print'), h('button', { onclick: () => { m.remove(); load(); } }, 'Close'))); };
+  const name = h('input', { placeholder: 'Full name' }), login = h('input', { placeholder: 'e.g. reception.branch1', autocapitalize: 'none' }), pw = h('input', { type: 'text', placeholder: 'Temporary password (10+ characters, letters and numbers)' });
+  const role = h('select', {}, [['receptionist', 'Receptionist'], ['manager', 'Salon manager'], ['accountant', 'Accountant'], ['owner', 'Owner / management']].map(([v, l]) => h('option', { value: v }, l)));
+  root.replaceChildren(
+    h('section', { class: 'card', style: 'margin-bottom:1rem' }, h('h2', {}, 'Technician logins'), h('p', { class: 'muted' }, 'Creates a login for every technician who does not have one yet (for example “ahmed@cutenails.local”) so they can see their own sales and commission.'),
+      h('button', { class: 'primary', onclick: async (e) => { e.target.disabled = true; try { const r = await api('POST', '/users/technician-logins', {}); if (!r.created) { msg.className = 'ok'; msg.textContent = 'Every technician already has a login.'; } else showLogins(r.logins); } catch (x) { msg.className = 'err'; msg.textContent = x.message; } e.target.disabled = false; } }, 'Create logins for all technicians'), msg),
+    h('section', { class: 'card', style: 'margin-bottom:1rem' }, h('h2', {}, 'Add another person'), h('div', { class: 'row' }, h('div', { class: 'grow' }, h('label', {}, 'Name'), name), h('div', { class: 'grow' }, h('label', {}, 'Login name'), login), h('div', { class: 'grow' }, h('label', {}, 'Role'), role)),
+      h('label', {}, 'Temporary password'), pw,
+      h('button', { class: 'primary', style: 'margin-top:.8rem', onclick: async () => { try { await api('POST', '/users', { fullName: name.value, email: login.value, roleCode: role.value, password: pw.value, branchIds: typeof activeBranch === 'number' ? [activeBranch] : me.branchIds });
+        showLogins([{ technician: name.value, login: login.value.trim().toLowerCase(), password: pw.value }]); name.value = login.value = pw.value = ''; } catch (x) { alert(x.message); } } }, 'Create login')),
+    h('section', { class: 'card' }, h('h2', {}, 'Everyone with a login'), out));
+  load();
+}
+
+// ---------- helpers for the office screens ----------
+const LABEL = { win_back: 'Win-back', at_risk: 'At risk', vip: 'VIP', new: 'New', active: 'Active', returning: 'Returning', due: 'Due', lapsed: 'Lapsed', inactive: 'Inactive' };
+const field = (label, input) => h('div', {}, h('label', {}, label), input);
+const waLink = (phone) => { const d = String(phone || '').replace(/\D/g, ''); const n = d.startsWith('254') ? d : d.startsWith('0') ? '254' + d.slice(1) : d.length === 9 ? '254' + d : d; return 'https://wa.me/' + n; };
+const fmtTime = (t) => new Date(t).toLocaleTimeString('en-KE', { hour: '2-digit', minute: '2-digit' });
+const fmtDay = (t) => new Date(t).toLocaleDateString('en-KE', { weekday: 'short', day: 'numeric', month: 'short' });
+const ymd = (t) => iso(new Date(t));
+function customerPicker(onPick) {
+  const box = h('div'), inp = h('input', { type: 'search', placeholder: 'Search customer by name or phone…', oninput: debounce(async (e) => {
+    const q = e.target.value.trim(); if (q.length < 2) return box.replaceChildren();
+    try { const r = (await api('GET', '/customers?q=' + encodeURIComponent(q))).rows;
+      box.replaceChildren(r.length ? h('div', { class: 'pick' }, r.map((c) => h('button', { type: 'button', onclick: () => onPick(c) }, h('b', {}, c.name), ' ', h('span', { class: 'muted small' }, c.phone || '')))) : h('div', { class: 'small muted' }, 'No match.'));
+    } catch (x) { box.replaceChildren(h('div', { class: 'err' }, x.message)); } }, 300) });
+  return h('div', {}, inp, box);
+}
+const statusTag = (st) => h('span', { class: 'tag-pill' + (st === 'vip' ? ' vip' : '') }, LABEL[st] || st);
+
+// ---------- inventory ----------
+function viewInventory(root) {
+  if (needBranch(root)) return;
+  const st = { q: '' }; const out = h('div'); let data;
+  const branchId = activeBranch;
+  const load = async () => {
+    try { data = await api('GET', '/products?branchId=' + branchId); draw(); }
+    catch (x) { out.replaceChildren(h('div', { class: 'err' }, x.message)); }
+  };
+  const tbl = h('section', { class: 'card' });
+  const drawTable = () => {
+    const rows = data.rows.filter((r) => (r.name + ' ' + r.sku).toLowerCase().includes(st.q.toLowerCase()));
+    tbl.replaceChildren(table([['Item'], ['Unit'], ['On hand', 1], ['Min', 1], ['Unit cost', 1], ...(data.showValue ? [['Value', 1]] : []), ['']],
+      rows.map((r) => [h('span', {}, r.name, r.low && h('span', { class: 'tag-pill low' }, 'LOW')), r.unit, r.onHand, r.minLevel || '–', money(r.unitCost), ...(data.showValue ? [money(r.value)] : []),
+        h('span', { class: 'row', style: 'gap:.2rem;flex-wrap:nowrap' }, data.canManage && h('button', { class: 'link', onclick: () => adjust(r) }, 'Adjust'), h('button', { class: 'link', onclick: () => history(r) }, 'History'), data.canManage && h('button', { class: 'link', onclick: () => editItem(r) }, 'Edit'))])));
+  };
+  const draw = () => {
+    const total = data.rows.reduce((a, r) => a + (r.value || 0), 0), low = data.rows.filter((r) => r.low);
+    drawTable();
+    out.replaceChildren(
+      h('div', { class: 'row', style: 'margin-bottom:.8rem' }, h('div', { class: 'grow' }, h('input', { type: 'search', placeholder: 'Search items…', value: st.q, oninput: (e) => { st.q = e.target.value; drawTable(); } })),
+        data.canManage && h('button', { class: 'primary', onclick: addItem }, '+ Add item'),
+        data.showValue && h('div', { class: 'stat' }, 'Stock value', h('b', {}, money(total)))),
+      low.length ? h('div', { class: 'err' }, 'Running low: ' + low.map((x) => `${x.name} (${x.onHand})`).join(', ')) : null, tbl);
+  };
+  const addItem = () => {
+    const name = h('input'), unit = h('input', { value: 'piece' }), cost = h('input', { type: 'number', min: '0', inputmode: 'decimal' }), min = h('input', { type: 'number', min: '0' }), open = h('input', { type: 'number', min: '0' });
+    const cat = h('select', {}, h('option', { value: '' }, '— none —'), data.categories.map((c) => h('option', { value: c.code }, c.name))), msg = h('div', { hidden: true, class: 'err' });
+    let m; m = modal(h('h2', {}, 'Add stock item'), field('Item name', name), field('Unit (piece, pack, bottle…)', unit), field('Category', cat), field('Cost per unit (KSh)', cost), field('Warn me when stock falls to', min), field('Quantity you have now', open), msg,
+      h('div', { class: 'row', style: 'margin-top:1rem' }, h('button', { class: 'primary', onclick: async () => { try { await api('POST', '/products', { branchId, name: name.value, unit: unit.value, categoryCode: cat.value, purchaseCost: cost.value || 0, minLevel: min.value || 0, openingQty: open.value || 0 }); m.remove(); load(); } catch (x) { msg.textContent = x.message; msg.hidden = false; } } }, 'Save'), h('button', { onclick: () => m.remove() }, 'Cancel')));
+  };
+  const editItem = (r) => {
+    const name = h('input', { value: r.name }), unit = h('input', { value: r.unit }), cost = h('input', { type: 'number', min: '0', value: r.unitCost }), min = h('input', { type: 'number', min: '0', value: r.minLevel }), msg = h('div', { hidden: true, class: 'err' });
+    let m; m = modal(h('h2', {}, 'Edit ' + r.name), field('Item name', name), field('Unit', unit), field('Cost per unit (KSh)', cost), field('Warn me when stock falls to', min), msg,
+      h('div', { class: 'row', style: 'margin-top:1rem' }, h('button', { class: 'primary', onclick: async () => { try { await api('PUT', '/products/' + r.id, { branchId, name: name.value, unit: unit.value, purchaseCost: cost.value, minLevel: min.value }); m.remove(); load(); } catch (x) { msg.textContent = x.message; msg.hidden = false; } } }, 'Save'), h('button', { onclick: () => m.remove() }, 'Cancel')));
+  };
+  const adjust = (r) => {
+    const type = h('select', {}, [['purchase', 'Bought more stock'], ['damaged', 'Damaged / thrown away'], ['expired', 'Expired'], ['return', 'Returned to stock'], ['adjustment', 'Correct the count (+ or −)']].map(([v, l]) => h('option', { value: v }, l)));
+    const qty = h('input', { type: 'number', inputmode: 'decimal', step: 'any' }), cost = h('input', { type: 'number', min: '0', value: r.unitCost }), why = h('input', { placeholder: 'e.g. bought from supplier, stock count' }), msg = h('div', { hidden: true, class: 'err' });
+    const costBox = field('Cost per unit (KSh)', cost); const sync = () => { costBox.hidden = type.value !== 'purchase'; }; type.onchange = sync; sync();
+    let m; m = modal(h('h2', {}, 'Change stock: ' + r.name), h('p', { class: 'muted small' }, `Now in stock: ${r.onHand} ${r.unit}`), field('What happened?', type), field('Quantity', qty), costBox, field('Reason', why), msg,
+      h('div', { class: 'row', style: 'margin-top:1rem' }, h('button', { class: 'primary', onclick: async () => { try { await api('POST', '/inventory/adjust', { branchId, productId: r.id, type: type.value, qty: Number(qty.value), unitCost: Number(cost.value) || 0, reason: why.value }); m.remove(); load(); } catch (x) { msg.textContent = x.message; msg.hidden = false; } } }, 'Save'), h('button', { onclick: () => m.remove() }, 'Cancel')));
+  };
+  const history = async (r) => {
+    const body = h('div', {}, 'Loading…'); let m; m = modal(h('h2', {}, 'Stock history: ' + r.name), body, h('div', { style: 'margin-top:1rem' }, h('button', { onclick: () => m.remove() }, 'Close')));
+    try { const x = (await api('GET', `/inventory/movements?branchId=${branchId}&productId=${r.id}`)).rows;
+      body.replaceChildren(table([['When'], ['What'], ['Qty', 1], ['Reason'], ['By']], x.map((y) => [new Date(y.at).toLocaleString('en-KE'), y.type.replace('_', ' '), (y.qty > 0 ? '+' : '') + y.qty, y.reason || '', y.by || '']))); }
+    catch (e) { body.textContent = e.message; }
+  };
+  root.replaceChildren(out); load();
+}
+
+// ---------- expenses ----------
+function viewExpenses(root) {
+  const st = { from: RANGES.month()[0], to: RANGES.month()[1] }; const out = h('div'), form = h('div'), branchId = activeBranch;
+  const load = async () => {
+    out.replaceChildren(h('p', { class: 'muted' }, 'Loading…'));
+    try {
+      const d = await api('GET', `/expenses?from=${st.from}&to=${st.to}${bq()}`);
+      if (d.canManage && !form.firstChild && typeof branchId === 'number') {
+        const date = h('input', { type: 'date', value: iso(new Date()) }), cat = h('select', {}, d.categories.map((c) => h('option', { value: c }, c[0].toUpperCase() + c.slice(1)))), amt = h('input', { type: 'number', min: '0', inputmode: 'decimal' }), desc = h('input', { placeholder: 'What was it for?' }), ref = h('input', { placeholder: 'M-Pesa code / receipt no (optional)' }), msg = h('div', { hidden: true });
+        form.append(h('section', { class: 'card', style: 'margin-bottom:1rem' }, h('h2', {}, 'Record an expense'), h('div', { class: 'row' }, h('div', { class: 'grow' }, field('Date', date)), h('div', { class: 'grow' }, field('Category', cat)), h('div', { class: 'grow' }, field('Amount (KSh)', amt))),
+          field('Description', desc), field('Reference', ref), msg, h('button', { class: 'primary', style: 'margin-top:.8rem', onclick: async () => {
+            try { await api('POST', '/expenses', { branchId, date: date.value, category: cat.value, amount: Number(amt.value), description: desc.value, reference: ref.value }); amt.value = desc.value = ref.value = ''; msg.className = 'ok'; msg.textContent = 'Saved.'; msg.hidden = false; load(); }
+            catch (x) { msg.className = 'err'; msg.textContent = x.message; msg.hidden = false; } } }, 'Save expense')));
+      }
+      out.replaceChildren(h('div', { class: 'row', style: 'margin-bottom:1rem;align-items:stretch' }, h('div', { class: 'stat' }, 'Total expenses', h('b', {}, money(d.total))), ...Object.entries(d.byCategory).map(([k, v]) => h('div', { class: 'stat' }, k[0].toUpperCase() + k.slice(1), h('b', {}, money(v))))),
+        h('section', { class: 'card' }, table([['Date'], ['Category'], ['Description'], ['Reference'], ['Amount', 1], ['']], d.rows.map((x) => [x.date, x.category, x.description, x.reference, money(x.amount),
+          d.canManage && h('button', { class: 'link', onclick: async () => { const why = prompt('Why are you deleting this expense? (e.g. entered twice)'); if (!why) return; try { await api('DELETE', `/expenses/${x.id}?reason=${encodeURIComponent(why)}`); load(); } catch (e) { alert(e.message); } } }, 'Delete')]),
+          ['Total', '', '', '', money(d.total), ''])));
+    } catch (x) { out.replaceChildren(h('div', { class: 'err' }, x.message)); }
+  };
+  root.replaceChildren(rangeBar(st, load), form, out); load();
+}
+
+// ---------- customers ----------
+function viewCustomers(root) {
+  const st = { q: '', status: '' }; const list = h('div');
+  const STATUSES = ['', 'vip', 'active', 'returning', 'due', 'at_risk', 'lapsed', 'win_back', 'inactive', 'new'];
+  const load = async () => {
+    try {
+      const d = (await api('GET', `/customer-list?q=${encodeURIComponent(st.q)}&status=${st.status}`)).rows;
+      list.replaceChildren(h('section', { class: 'card' }, h('p', { class: 'small muted' }, `${d.length} customer(s)` + (d.length === 500 ? ' (showing the first 500, narrow the search)' : '')),
+        table([['Customer'], ['Phone'], ['Visits', 1], ['Spent', 1], ['Avg / visit', 1], ['Last visit'], ['Next expected'], ['Status']],
+          d.map((c) => [h('button', { class: 'link', onclick: () => profile(c.id) }, c.name), c.phone || '', c.visits, money(c.spend), c.avgSpend == null ? '–' : money(c.avgSpend), c.lastVisit || '–', c.nextVisit || '–', statusTag(c.status)]))));
+    } catch (x) { list.replaceChildren(h('div', { class: 'err' }, x.message)); }
+  };
+  const chips = h('div', { class: 'chips' });
+  const drawChips = () => chips.replaceChildren(...STATUSES.map((s) => h('button', { class: 'chip', 'aria-pressed': st.status === s, onclick: () => { st.status = s; drawChips(); load(); } }, s ? LABEL[s] : 'All')));
+  drawChips();
+  const addCustomer = () => {
+    const name = h('input'), phone = h('input', { type: 'tel', placeholder: '07XX XXX XXX' }), bd = h('input', { type: 'date', max: new Date().toISOString().slice(0, 10) }), consent = h('input', { type: 'checkbox', style: 'width:auto;min-height:0' }), msg = h('div', { hidden: true, class: 'err' });
+    let m; m = modal(h('h2', {}, 'Add customer'), field('Full name', name), field('Phone', phone), field('Birthday (optional)', bd), h('label', { class: 'row', style: 'color:inherit' }, consent, 'Agrees to receive offers and reminders'), msg,
+      h('div', { class: 'row', style: 'margin-top:1rem' }, h('button', { class: 'primary', onclick: async () => { try { const r = await api('POST', '/customers', { fullName: name.value, phone: phone.value, birthday: bd.value || undefined, consent: consent.checked }); m.remove(); load(); profile(r.id); } catch (x) { msg.textContent = x.message; msg.hidden = false; } } }, 'Save'), h('button', { onclick: () => m.remove() }, 'Cancel')));
+  };
+  root.replaceChildren(h('div', { class: 'card row' }, h('div', { class: 'grow' }, h('input', { type: 'search', placeholder: 'Search by name or phone…', oninput: debounce((e) => { st.q = e.target.value.trim(); load(); }, 300) })), can('customers.manage') && h('button', { class: 'primary', onclick: addCustomer }, '+ Add customer')), chips, list);
+  load();
+}
+async function profile(id) {
+  const body = h('div', {}, 'Loading…'); let m; m = modal(body); m.firstChild.style.maxWidth = '720px';
+  const render = async () => {
+    try {
+      const c = await api('GET', '/customers/' + id);
+      let loy = null; try { loy = await api('GET', `/customers/${id}/loyalty`); } catch { /* optional */ }
+      const stat = (l, v) => h('div', { class: 'stat' }, l, h('b', {}, v ?? '–'));
+      const name = h('input', { value: c.name }), phone = h('input', { type: 'tel', value: c.phone || '' }), bday = h('input', { type: 'date', value: c.birthday || '' }), allergies = h('input', { value: c.allergies || '', placeholder: 'e.g. latex, acetone' }), consent = h('input', { type: 'checkbox', style: 'width:auto;min-height:0', checked: c.consent }), msg = h('div', { hidden: true });
+      const note = h('input', { placeholder: 'Add a note about this customer…' });
+      body.replaceChildren(h('div', { class: 'row' }, h('h2', { class: 'grow', style: 'margin:0' }, c.name, ' ', statusTag(c.status)), h('button', { onclick: () => m.remove() }, 'Close')),
+        h('p', { class: 'muted' }, c.phone || 'no phone', c.consent && c.phone ? [' · ', h('a', { href: waLink(c.phone), target: '_blank', rel: 'noopener' }, 'Open WhatsApp')] : c.phone ? ' · no marketing consent' : ''),
+        h('div', { class: 'row', style: 'align-items:stretch' }, stat('Visits', c.visits), stat('Lifetime spend', money(c.spend)), stat('Avg / visit', c.avgSpend == null ? null : money(c.avgSpend)), stat('Services bought', c.servicesBought),
+          stat('Days since visit', c.daysSince), stat('Avg days between', c.avgDaysBetween), stat('Next expected', c.nextVisit), stat('Top service', c.topService), stat('Usual technician', c.preferredTechnician)),
+        c.canManage && h('section', { class: 'card', style: 'margin:1rem 0' }, h('h3', {}, 'Details'), h('div', { class: 'row' }, h('div', { class: 'grow' }, field('Name', name)), h('div', { class: 'grow' }, field('Phone', phone))),
+          h('div', { class: 'row' }, h('div', { class: 'grow' }, field('Birthday', bday)), h('div', { class: 'grow' }, field('Allergies / warnings', allergies))),
+          h('label', { class: 'row', style: 'color:inherit' }, consent, 'Agrees to receive offers and reminders'), msg,
+          h('button', { class: 'primary', style: 'margin-top:.6rem', onclick: async () => { try { await api('PUT', '/customers/' + id, { fullName: name.value, phone: phone.value, birthday: bday.value, allergies: allergies.value, consent: consent.checked }); render(); } catch (x) { msg.className = 'err'; msg.textContent = x.message; msg.hidden = false; } } }, 'Save details')),
+        loy && h('section', { class: 'card', style: 'margin:1rem 0' }, h('h3', {}, 'Loyalty points'),
+          h('p', {}, h('b', {}, loy.balance + ' points'), ` (worth ${money(loy.value)}) · earned in total ${loy.lifetime}`),
+          ...loy.history.slice(0, 5).map((x) => h('div', { class: 'line small' }, (x.points > 0 ? '+' : '') + x.points + ' — ' + x.reason, h('span', { class: 'muted' }, ' · ' + new Date(x.at).toLocaleDateString('en-KE')))),
+          can('marketing.manage') && h('button', { style: 'margin-top:.5rem', onclick: async () => { const pts = prompt('Points to add (use a minus sign to remove):'); if (!pts) return; const why = prompt('Reason:'); if (!why) return; try { await api('POST', `/customers/${id}/loyalty/adjust`, { points: Number(pts), reason: why }); render(); } catch (x) { alert(x.message); } } }, 'Adjust points')),
+        !c.canManage && c.allergies && h('p', { class: 'err' }, 'Allergies: ' + c.allergies),
+        h('h3', { style: 'margin-top:1rem' }, 'Notes'), ...c.notes.map((n) => h('div', { class: 'line small' }, n.note, h('span', { class: 'muted' }, ` — ${n.by || ''}, ${new Date(n.at).toLocaleDateString('en-KE')}`))),
+        c.canManage && h('div', { class: 'row', style: 'margin-top:.4rem' }, h('div', { class: 'grow' }, note), h('button', { onclick: async () => { if (!note.value.trim()) return; try { await api('POST', `/customers/${id}/notes`, { note: note.value }); render(); } catch (x) { alert(x.message); } } }, 'Add note')),
+        h('h3', { style: 'margin-top:1rem' }, 'Visit history'), table([['Date'], ['Receipt'], ['Services'], ['Total', 1]], c.history.map((x) => [x.date, x.receipt, x.services, money(x.total)])));
+    } catch (x) { body.replaceChildren(h('div', { class: 'err' }, x.message), h('button', { onclick: () => m.remove() }, 'Close')); }
+  };
+  render();
+}
+
+// ---------- follow-ups: customers who are due back ----------
+function viewDue(root) {
+  const st = { statuses: ['due', 'at_risk'] }; const out = h('div'), bar = h('div', { class: 'chips' });
+  const NAMES = { due: 'Due now', at_risk: 'At risk', lapsed: 'Lapsed (60+ days)', win_back: 'Win-back (90+ days)' };
+  const msgFor = (r) => `Hi ${r.name.split(' ')[0]}, it's been a while since your last visit to ${brand.name}. We'd love to see you again - would you like to book an appointment?`;
+  const load = async () => {
+    out.replaceChildren(h('p', { class: 'muted' }, 'Loading…'));
+    try {
+      const d = await api('GET', '/customers/due?statuses=' + st.statuses.join(','));
+      bar.replaceChildren(...Object.keys(NAMES).map((k) => h('button', { class: 'chip', 'aria-pressed': st.statuses.includes(k), onclick: () => { st.statuses = st.statuses.includes(k) ? st.statuses.filter((x) => x !== k) : [...st.statuses, k]; if (!st.statuses.length) st.statuses = [k]; load(); } }, `${NAMES[k]} (${d.counts[k]})`)));
+      const day = (t) => Math.floor((Date.now() - new Date(t)) / 86400000);
+      out.replaceChildren(h('section', { class: 'card' }, table([['Customer'], ['Status'], ['Last visit'], ['Days ago', 1], ['Visits', 1], ['Spent', 1], ['']], d.rows.map((r) => [
+        h('span', {}, h('button', { class: 'link', onclick: () => profile(r.id) }, r.name), r.vip && ' ★'), statusTag(r.status), r.lastVisit || '–', r.daysSince ?? '–', r.visits, money(r.spend),
+        h('span', { class: 'row' }, r.phone && r.consent && h('a', { class: 'btn', href: waLink(r.phone) + '?text=' + encodeURIComponent(msgFor(r)), target: '_blank', rel: 'noopener', onclick: () => api('POST', `/customers/${r.id}/contacted`, { channel: 'whatsapp' }).then(load).catch(() => {}) }, 'WhatsApp'),
+          r.phone && !r.consent && h('span', { class: 'small muted' }, 'no consent'), r.phone && h('a', { class: 'btn', href: 'tel:' + r.phone }, 'Call'),
+          r.contactedAt && h('span', { class: 'small muted' }, `contacted ${day(r.contactedAt)}d ago`))])),
+        h('p', { class: 'small muted' }, 'Customers whose usual return time has passed (their own rhythm once they have 3+ visits, otherwise 28 days). Anyone with a booked appointment is left out. Opening WhatsApp records that you contacted them.')));
+    } catch (x) { out.replaceChildren(h('div', { class: 'err' }, x.message)); }
+  };
+  root.replaceChildren(h('h2', {}, 'Customers due back'), bar, out); load();
+}
+
+// ---------- loyalty ----------
+function viewLoyalty(root) {
+  const out = h('div'), msg = h('div', { hidden: true });
+  const load = async () => {
+    try {
+      const d = await api('GET', '/loyalty/overview'), r = d.rules;
+      const f = { spendPerPoint: h('input', { type: 'number', min: '0', value: r.spendPerPoint }), pointsPerVisit: h('input', { type: 'number', min: '0', value: r.pointsPerVisit }), birthdayBonus: h('input', { type: 'number', min: '0', value: r.birthdayBonus }),
+        pointValue: h('input', { type: 'number', min: '0', step: '0.1', value: r.pointValue }), minRedeem: h('input', { type: 'number', min: '0', value: r.minRedeem }) };
+      const row = (l, el, hint) => h('div', { style: 'flex:1 1 220px' }, h('label', {}, l), el, h('div', { class: 'small muted' }, hint));
+      out.replaceChildren(
+        h('div', { class: 'row', style: 'margin-bottom:1rem' }, h('div', { class: 'stat' }, 'Members with points', h('b', {}, d.members)), h('div', { class: 'stat' }, 'Points outstanding', h('b', {}, d.outstandingPoints)), h('div', { class: 'stat' }, 'Value owed to customers', h('b', {}, money(d.outstandingValue)))),
+        h('section', { class: 'card', style: 'margin-bottom:1rem' }, h('h2', {}, 'How points work'),
+          h('p', { class: 'muted' }, r.spendPerPoint > 0 ? `Customers earn 1 point for every ${money(r.spendPerPoint)} spent` + (r.pointsPerVisit ? `, plus ${r.pointsPerVisit} per visit` : '') + (r.birthdayBonus ? `, plus ${r.birthdayBonus} on their birthday` : '') + `. Each point is worth ${money(r.pointValue)} off; the minimum to use is ${r.minRedeem} points.` : 'Points are switched off. Set “Spend per point” to start.'),
+          d.canManage ? [h('div', { class: 'row' }, row('Spend per point (KSh)', f.spendPerPoint, 'e.g. 100 = 1 point per KSh 100. 0 = off'), row('Points per visit', f.pointsPerVisit, 'optional'), row('Birthday bonus (points)', f.birthdayBonus, 'optional, once a year')),
+            h('div', { class: 'row' }, row('Value of 1 point (KSh)', f.pointValue, 'discount given per point'), row('Minimum points to use', f.minRedeem, '')),
+            h('button', { class: 'primary', style: 'margin-top:.6rem', onclick: async () => { try { await api('PUT', '/loyalty/rules', Object.fromEntries(Object.entries(f).map(([k, el]) => [k, Number(el.value) || 0]))); msg.className = 'ok'; msg.textContent = 'Saved. New rules apply to sales from now on.'; msg.hidden = false; load(); } catch (x) { msg.className = 'err'; msg.textContent = x.message; msg.hidden = false; } } }, 'Save rules'), msg] : null,
+          h('p', { class: 'small muted' }, 'Points are added automatically when a sale is rung up for a customer, and taken back if the sale is voided. To use points, pick the customer on the New sale screen and press “Use points on this sale”. Past imported sales do not earn points.')),
+        h('section', { class: 'card' }, h('h2', {}, 'Top balances'), table([['Customer'], ['Points', 1], ['Worth', 1], ['Earned in total', 1]], d.top.map((x) => [h('button', { class: 'link', onclick: () => profile(x.id) }, x.name), x.balance, money(x.value), x.lifetime]))));
+    } catch (x) { out.replaceChildren(h('div', { class: 'err' }, x.message)); }
+  };
+  root.replaceChildren(out); load();
+}
+
+// ---------- marketing campaigns ----------
+function viewCampaigns(root) {
+  const out = h('div');
+  const GROUPS = [['vip', 'VIP'], ['active', 'Active'], ['returning', 'Returning'], ['new', 'New'], ['due', 'Due now'], ['at_risk', 'At risk'], ['lapsed', 'Lapsed'], ['win_back', 'Win-back'], ['inactive', 'Inactive (180+ days)']];
+  const TEMPLATES = [['Win-back offer', ['lapsed', 'win_back'], 'Hi {name}, we miss you at {salon}! Book this week and enjoy 10% off your next service. Reply to book.'],
+    ['Due for a visit', ['due', 'at_risk'], 'Hi {name}, it is about time for your next appointment at {salon}. Would you like us to book you in?'],
+    ['Thank you to VIPs', ['vip'], 'Hi {name}, thank you for being one of our best clients at {salon}. Book this week and get a free add-on on us!']];
+  const load = async () => {
+    out.replaceChildren(h('p', { class: 'muted' }, 'Loading…'));
+    try {
+      const d = await api('GET', '/campaigns');
+      out.replaceChildren(d.canManage && h('div', { style: 'margin-bottom:1rem' }, h('button', { class: 'primary', onclick: newCampaign }, 'New campaign')),
+        h('section', { class: 'card' }, table([['Campaign'], ['Sent'], ['Still to send', 1], ['Replies', 1], ['Bookings', 1], ['Visits', 1], ['Revenue', 1], ['']], d.rows.map((x) => [x.name + (x.status === 'cancelled' ? ' (cancelled)' : ''), `${x.sent} of ${x.audience}`, x.queued, x.replies, x.bookings, x.visits, money(x.revenue),
+          h('button', { class: 'link', onclick: () => openCampaign(x.id) }, x.queued ? 'Send' : 'View')])),
+          h('p', { class: 'small muted' }, 'Bookings, visits and revenue count what the people you messaged did within the tracking window after you messaged them.')));
+    } catch (x) { out.replaceChildren(h('div', { class: 'err' }, x.message)); }
+  };
+  const newCampaign = () => {
+    const st = { statuses: [], birthday: false };
+    const name = h('input', { placeholder: 'e.g. October win-back' }), msgBox = h('textarea', { rows: 4, maxlength: 600, placeholder: 'Write your message. {name} becomes the customer\'s first name.' }), err = h('div', { class: 'err', hidden: true });
+    const chan = h('select', {}, h('option', { value: 'whatsapp' }, 'WhatsApp'), h('option', { value: 'sms' }, 'SMS')), win = h('input', { type: 'number', min: '1', max: '90', value: '14' });
+    const count = h('div', { class: 'ok small' }, 'Pick who to message.');
+    const chips = h('div', { class: 'chips' });
+    const audience = async () => {
+      chips.replaceChildren(...GROUPS.map(([k, l]) => h('button', { type: 'button', class: 'chip', 'aria-pressed': st.statuses.includes(k), onclick: () => { st.statuses = st.statuses.includes(k) ? st.statuses.filter((x) => x !== k) : [...st.statuses, k]; audience(); } }, l)),
+        h('button', { type: 'button', class: 'chip', 'aria-pressed': st.birthday, onclick: () => { st.birthday = !st.birthday; audience(); } }, 'Birthday this month'));
+      if (!st.statuses.length && !st.birthday) { count.textContent = 'Pick who to message.'; return; }
+      try { const a = await api('POST', '/campaigns/audience', { statuses: st.statuses, birthdayThisMonth: st.birthday }); count.textContent = `${a.count} customer(s) will get this. ${a.noConsent} in these groups are left out because they have not agreed to marketing.`; }
+      catch (x) { count.textContent = x.message; }
+    };
+    let m; m = modal(h('h2', {}, 'New campaign'),
+      h('div', { class: 'chips' }, TEMPLATES.map(([l, g, t]) => h('button', { type: 'button', class: 'chip', onclick: () => { name.value ||= l; msgBox.value = t; st.statuses = [...g]; audience(); } }, 'Template: ' + l))),
+      h('label', {}, 'Campaign name'), name, h('label', {}, 'Who should get it?'), chips, count, h('label', {}, 'Message'), msgBox,
+      h('div', { class: 'row' }, h('div', { class: 'grow' }, h('label', {}, 'Send through'), chan), h('div', { class: 'grow' }, h('label', {}, 'Track results for (days)'), win)), err,
+      h('div', { class: 'row', style: 'margin-top:1rem' }, h('button', { class: 'primary', onclick: async (e) => { e.target.disabled = true; err.hidden = true;
+        try { const r = await api('POST', '/campaigns', { name: name.value, channel: chan.value, message: msgBox.value, statuses: st.statuses, birthdayThisMonth: st.birthday, attributionDays: Number(win.value) }); m.remove(); await load(); openCampaign(r.id); }
+        catch (x) { err.textContent = x.message; err.hidden = false; e.target.disabled = false; } } }, 'Create'), h('button', { onclick: () => m.remove() }, 'Cancel')));
+    audience();
+  };
+  const openCampaign = (id) => {
+    const body = h('div', {}, 'Loading…'); let m; m = modal(body); m.firstChild.style.maxWidth = '760px';
+    const act = async (r, what) => { try { await api('POST', `/campaigns/${id}/recipients/${r.id}/${what}`); draw(); } catch (x) { alert(x.message); } };
+    const draw = async () => {
+      try {
+        const c = await api('GET', '/campaigns/' + id), q = c.recipients.filter((r) => r.status === 'queued').length;
+        const link = (r) => c.channel === 'sms' ? 'sms:' + r.phone + '?body=' + encodeURIComponent(r.message) : waLink(r.phone) + '?text=' + encodeURIComponent(r.message);
+        body.replaceChildren(h('div', { class: 'row' }, h('h2', { class: 'grow', style: 'margin:0' }, c.name), h('button', { onclick: () => { m.remove(); load(); } }, 'Close')),
+          h('p', { class: 'muted' }, `${c.recipients.length} people · ${q} still to send · ${c.status}. Tap “Send” to open ${c.channel === 'sms' ? 'your messages' : 'WhatsApp'} with the message ready, send it, then come back — it is marked as sent when you tap.`),
+          h('div', { class: 'small', style: 'background:var(--teal-l);padding:.6rem;border-radius:10px;margin-bottom:.6rem' }, c.template),
+          c.canManage && c.status !== 'cancelled' && q > 0 && h('button', { class: 'link', onclick: async () => { if (!confirm('Cancel this campaign? Nothing more will be sent.')) return; try { await api('POST', `/campaigns/${id}/cancel`); draw(); } catch (x) { alert(x.message); } } }, 'Cancel campaign'),
+          table([['Customer'], ['Phone'], ['Status'], ['']], c.recipients.map((r) => [r.name, r.phone, r.status.replace('_', ' '),
+            c.canManage && c.status !== 'cancelled' ? h('span', { class: 'row' }, r.status === 'queued' && h('a', { class: 'btn primary', href: link(r), target: '_blank', rel: 'noopener', onclick: () => act(r, 'sent') }, 'Send'),
+              ['sent', 'delivered', 'read'].includes(r.status) && h('button', { onclick: () => act(r, 'replied') }, 'They replied'),
+              !['opted_out'].includes(r.status) && h('button', { class: 'link', onclick: () => { if (confirm(r.name + ' asked not to receive messages? They will be excluded from all future campaigns.')) act(r, 'opted-out'); } }, 'Asked to stop')) : ''])));
+      } catch (x) { body.replaceChildren(h('div', { class: 'err' }, x.message), h('button', { onclick: () => m.remove() }, 'Close')); }
+    };
+    draw();
+  };
+  root.replaceChildren(out); load();
+}
+
+// ---------- appointments ----------
+function viewAppointments(root) {
+  const st = { from: iso(new Date()), to: iso(addDays(new Date(), 6)) }; const out = h('div'), form = h('div'); let services = [], techs = [], statuses = [];
+  const label = (s) => s.replace('_', ' ').replace(/^./, (c) => c.toUpperCase());
+  const load = async () => {
+    out.replaceChildren(h('p', { class: 'muted' }, 'Loading…'));
+    try {
+      const d = await api('GET', `/appointments?from=${st.from}&to=${st.to}${bq()}`); statuses = d.statuses;
+      if (d.canManage && !form.firstChild && typeof activeBranch === 'number') await bookingForm();
+      const days = {}; d.rows.forEach((a) => (days[ymd(a.startsAt)] ||= []).push(a));
+      out.replaceChildren(...(Object.keys(days).length ? Object.entries(days).map(([day, rows]) => h('section', { class: 'card', style: 'margin-bottom:1rem' }, h('h2', {}, fmtDay(day + 'T12:00:00')),
+        table([['Time'], ['Customer'], ['Services'], ['Technician'], ['Deposit', 1], ['Status'], ['']], rows.map((a) => [`${fmtTime(a.startsAt)} (${a.minutes} min)`, h('span', {}, a.customer, a.phone ? h('div', { class: 'small muted' }, a.phone) : null), a.services.map((x) => x.name).join(', ') || '–', a.technician || 'Any', a.deposit ? money(a.deposit) : '–',
+          d.canManage ? h('select', { onchange: async (e) => { try { await api('PUT', `/appointments/${a.id}/status`, { status: e.target.value }); } catch (x) { alert(x.message); load(); } } }, statuses.map((s) => h('option', { value: s, selected: s === a.status }, label(s)))) : label(a.status),
+          can('sales.create') && !['completed', 'cancelled', 'no_show'].includes(a.status) ? h('button', { class: 'link', onclick: () => { prefill = { cust: { id: a.customerId, name: a.customer, phone: a.phone }, serviceIds: a.services.map((x) => x.id), techId: a.technicianId, appointmentId: a.id }; current = 'sale'; renderShell(); } }, 'Ring up sale') : null])))) : [h('p', { class: 'muted' }, 'No appointments in these dates.')]));
+    } catch (x) { out.replaceChildren(h('div', { class: 'err' }, x.message)); }
+  };
+  const bookingForm = async () => {
+    [services, techs] = (await Promise.all([api('GET', '/services'), api('GET', '/technicians' + bq('?'))])).map((x) => x.rows.filter((r) => r.active));
+    let cust = null, picked = [];
+    const box = h('div'), chosen = h('div', { class: 'small' }), when = h('input', { type: 'datetime-local', onchange: () => showHours() }), whenHint = h('div', { class: 'small muted' }), overrideBox = h('input', { type: 'checkbox', style: 'width:auto;min-height:0' }), overrideRow = h('label', { class: 'row', style: 'color:inherit;font-size:.9rem;margin:.3rem 0' }, overrideBox, 'Owner override: allow outside opening hours'), tech = h('select', {}, h('option', { value: '' }, 'Any technician'), techs.map((t) => h('option', { value: t.id }, t.name))), dep = h('input', { type: 'number', min: '0', placeholder: '0' }), notes = h('input', { placeholder: 'Notes (optional)' }), msg = h('div', { hidden: true });
+    const svcSel = h('select', { onchange: () => { const v = Number(svcSel.value); if (v && !picked.includes(v)) picked.push(v); svcSel.value = ''; drawSvc(); } }, h('option', { value: '' }, '+ Add a service…'), services.map((s) => h('option', { value: s.id }, `${s.name} – ${money(s.price)}`)));
+    const drawSvc = () => chosen.replaceChildren(...picked.map((id) => h('span', { class: 'tag-pill', style: 'margin-right:.3rem' }, services.find((s) => s.id === id).name, ' ', h('button', { class: 'link', 'aria-label': 'Remove', onclick: () => { picked = picked.filter((x) => x !== id); drawSvc(); } }, '×'))));
+    const drawCust = () => box.replaceChildren(cust ? h('div', { class: 'row' }, h('b', {}, cust.name), h('span', { class: 'muted small' }, cust.phone || ''), h('button', { class: 'link', onclick: () => { cust = null; drawCust(); } }, 'Change')) : customerPicker((c) => { cust = c; drawCust(); }));
+    drawCust();
+    const DAYKEYS = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+    const hoursFor = () => { if (!when.value) return null; const d = new Date(when.value); return { d, h: (brand.hours || {})[DAYKEYS[d.getDay()]] }; };
+    function showHours() { const x = hoursFor(); if (!x || !x.h) { whenHint.textContent = ''; return; }
+      const t = `${String(x.d.getHours()).padStart(2, '0')}:${String(x.d.getMinutes()).padStart(2, '0')}`;
+      const out = x.h.closed || t < x.h.open || t >= x.h.close; whenHint.style.color = out ? 'var(--bad)' : '';       whenHint.textContent = x.h.closed ? 'We are closed on this day.' : `Open ${x.h.open} to ${x.h.close}` + (out ? ' — this time is outside opening hours.' : ''); }
+    form.append(h('details', { class: 'card', style: 'margin-bottom:1rem' }, h('summary', { style: 'cursor:pointer;font-weight:700' }, '+ Book an appointment'), h('div', { style: 'margin-top:.6rem' }, field('Customer', box), h('div', { class: 'row' }, h('div', { class: 'grow' }, field('Date and time', when), whenHint, can('settings.business') && overrideRow), h('div', { class: 'grow' }, field('Technician', tech)), h('div', { class: 'grow' }, field('Deposit (KSh)', dep))),
+      field('Services', h('div', {}, svcSel, chosen)), field('Notes', notes), msg, h('button', { class: 'primary', style: 'margin-top:.8rem', onclick: async () => {
+        if (!cust) { msg.className = 'err'; msg.textContent = 'Choose a customer first (add new customers on the Customers tab).'; msg.hidden = false; return; }
+        if (!when.value) { msg.className = 'err'; msg.textContent = 'Choose the date and time.'; msg.hidden = false; return; }
+        { const x = hoursFor(); const t = x && `${String(x.d.getHours()).padStart(2, '0')}:${String(x.d.getMinutes()).padStart(2, '0')}`;
+          if (x?.h && !overrideBox.checked && (x.h.closed || t < x.h.open || t >= x.h.close)) { msg.className = 'err'; msg.textContent = x.h.closed ? 'We are closed on that day. Choose another day.' : `Opening hours are ${x.h.open} to ${x.h.close}. Choose a time within them.`; msg.hidden = false; return; } }
+        try { await api('POST', '/appointments', { branchId: activeBranch, customerId: cust.id, technicianId: tech.value || undefined, startsAt: new Date(when.value).toISOString(), serviceIds: picked, deposit: dep.value || 0, overrideHours: overrideBox.checked || undefined, notes: notes.value });
+          msg.className = 'ok'; msg.textContent = 'Booked.'; msg.hidden = false; cust = null; picked = []; drawCust(); drawSvc(); notes.value = dep.value = ''; load(); }
+        catch (x) { msg.className = 'err'; msg.textContent = x.message; msg.hidden = false; } } }, 'Book'))));
+  };
+  root.replaceChildren(rangeBar(st, load), form, out); load();
+}
+
+loadBrand().then(start);
+</script>
+</body>
+</html>
