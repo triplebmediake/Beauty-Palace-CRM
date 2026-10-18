@@ -569,8 +569,8 @@ function viewImport(root) {
         h('div', { class: 'row' }, commit, h('button', { onclick: preview }, 'Check again'))),
       aliasTable('Unknown services', p.unknown.services, svcAlias, 'service'), aliasTable('Unknown technicians', p.unknown.technicians, techAlias, 'technician'),
       p.unknown.products?.length ? h('section', { class: 'card', style: 'margin-top:1rem' }, h('h2', {}, 'Unknown materials'), h('p', { class: 'small muted' }, p.unknown.products.map((u) => `${u.name} (${u.count})`).join(', '))) : null,
-      p.errors.length ? h('section', { class: 'card', style: 'margin-top:1rem' }, h('h2', {}, 'Problems'), table([['Row', 1], ['Problem']], p.errors.map((e) => [e.row ?? '', e.message]))) : null,
-      p.warnings.length ? h('section', { class: 'card', style: 'margin-top:1rem' }, h('h2', {}, 'Warnings'), table([['Row', 1], ['Note']], p.warnings.slice(0, 50).map((e) => [e.row ?? '', e.message ?? String(e)]))) : null,
+      p.errors.shown?.length ? h('section', { class: 'card', style: 'margin-top:1rem' }, h('h2', {}, 'Problems' + (p.errors.total > p.errors.shown.length ? ` (first ${p.errors.shown.length} of ${p.errors.total})` : '')), table([['Row', 1], ['Problem']], p.errors.shown.map((e) => [e.row ?? '', e.message]))) : null,
+      p.warnings.shown?.length ? h('section', { class: 'card', style: 'margin-top:1rem' }, h('h2', {}, 'Warnings'), table([['Row', 1], ['Note']], p.warnings.shown.slice(0, 50).map((e) => [e.row ?? '', e.message ?? String(e)]))) : null,
       h('section', { class: 'card', style: 'margin-top:1rem' }, h('h2', {}, 'First visits in the file'),
         table([['Date'], ['Customer'], ['Services'], ['Total', 1]], p.sample.map((v) => [v.date, v.customer, v.lines.map((l) => `${l.service} (${l.technician})`).join(', '), money(v.total)]))));
   };
