@@ -167,3 +167,6 @@ On the New sale screen, a hair service has a tick box **Collabo: two hairdresser
 - Settings → choose **"Beauty Palace Kenya only"** to set that branch's name, logo, phone, address, receipt footer and opening hours. Anything left blank (or equal to the default) follows "All branches". Status/VIP rules stay global.
 - Receipts are numbered `BPK-year-number`; reports, commissions, staff and appointments are separated per branch; appointments respect that branch's opening hours.
 - Inventory for Branch 2 starts empty: add its products on the Inventory screen while that branch is selected.
+
+## One installation per branch
+Set `ONLY_BRANCH_CODE` (for example `BPK`) on an installation that serves a single branch. The branch switcher and the "which branch" choices disappear, and that branch is used everywhere.

@@ -80,8 +80,11 @@ export function registerRoutes(app, { db, tx, secret, deps = {}, now }) {
   });
   app.get('/me', ...secure(), async (req, res) => {
     const all = req.user.permissions.has('branches.manage');
-    const b = await db.query(`SELECT id, name FROM branches WHERE is_active AND ($1::boolean OR id = ANY($2::bigint[])) ORDER BY id`, [all, req.user.branchIds]);
-    res.json({ id: req.user.id, name: req.user.name, role: req.user.role, permissions: [...req.user.permissions].sort(), branchIds: req.user.branchIds, technicianId: req.user.technicianId,
+    // ONLY_BRANCH_CODE (optional): a separate installation that serves one branch shows no branch switcher.
+    const only = (process.env.ONLY_BRANCH_CODE || '').trim() || null;
+    const b = await db.query(`SELECT id, name FROM branches WHERE is_active AND ($1::boolean OR id = ANY($2::bigint[])) AND ($3::text IS NULL OR code = $3) ORDER BY id`, [all, req.user.branchIds, only]);
+    const ids = b.rows.map((x) => Number(x.id));
+    res.json({ id: req.user.id, name: req.user.name, role: req.user.role, permissions: [...req.user.permissions].sort(), branchIds: only ? req.user.branchIds.filter((i) => ids.includes(i)) : req.user.branchIds, technicianId: req.user.technicianId,
       branches: b.rows.map((x) => ({ id: Number(x.id), name: x.name })) });
   });
   // The web screen (one HTML file) is served by the same app, so no extra hosting or CORS setup is needed.
