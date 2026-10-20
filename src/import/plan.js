@@ -86,7 +86,10 @@ export function planImport(table, ref, options = {}) {
       if (!tech) { if (O.createTechnicians) { const k = normName(r.techName); if (!newTechs.has(k)) newTechs.set(k, { id: null, isNew: true, display_name: r.techName, branch_id: branch?.id ?? null }); tech = newTechs.get(k); }
         else { bad.push(`Technician "${r.techName}" is not in your staff list`); bump(unknown.technicians, r.techName, { suggestions: similar(r.techName, techList.map((t) => t.display_name)) }); } } }
     const materials = [];
-    for (const m of parseMaterials(r.matText)) {
+    // A plain amount (220, "KSh 1,200") = materials bought for this job, entered as money instead of stock items.
+    const manualMaterialCents = /^\s*(?:ksh?s?\.?|kes)?\s*\d[\d,]*(?:\.\d+)?\s*(?:\/=|\/-)?\s*$/i.test(String(r.matText ?? '')) ? parseAmount(r.matText) : null;
+    if (manualMaterialCents !== null && manualMaterialCents > r.amount) bad.push(`Materials cost ${manualMaterialCents / 100} is more than the service amount`);
+    for (const m of manualMaterialCents !== null ? [] : parseMaterials(r.matText)) {
       const p = findProduct(m.name);
       if (p) materials.push({ product: p, qty: m.qty, costCents: Math.round(m.qty * p.unit_cost_cents) });
       else { bump(unknown.products, m.name, { suggestions: similar(m.name, ref.products.map((x) => x.name)) });
@@ -94,7 +97,7 @@ export function planImport(table, ref, options = {}) {
     }
     if (bad.length) { bad.forEach((m) => err(r.n, m)); continue; }
     const method = parseMethod(r.methodRaw); if (!method) warn(r.n, 'No payment method given; recorded as "other"');
-    rows.push({ ...r, branch, svc, tech, materials, method: method || 'other' });
+    rows.push({ ...r, branch, svc, tech, materials, manualMaterialCents, method: method || 'other' });
   }
 
   // ---- pass 3: customers (match existing, merge within file, else create)
@@ -153,7 +156,7 @@ export function planImport(table, ref, options = {}) {
   for (const v of visits) {
     v.payments = new Map(); v.total = 0;
     for (const l of v.lines) {
-      l.materialCents = l.materials.reduce((a, m) => a + m.costCents, 0);
+      l.materialCents = l.manualMaterialCents ?? l.materials.reduce((a, m) => a + m.costCents, 0);
       const rule = resolveRule(ref.rules, { technicianId: l.tech.id, serviceId: l.svc.id, categoryId: l.svc.category_id, onDate: v.date });
       const rk = techKey(l.tech) + '|' + weekStart(v.date), prior = running.get(rk) || 0;
       const c = calculateCommission(rule, { priceCents: l.amount, materialCents: l.materialCents, priorBaseCents: prior });

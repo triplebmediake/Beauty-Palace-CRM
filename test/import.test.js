@@ -228,3 +228,13 @@ test('commit and rollback run inside one audited transaction with a reason; roll
   assert.equal((await s.call('/import/7/rollback', { reason: 'Wrong month' }, 1)).status, 200); assert.equal(s.calls.rollback[0].id, 7);
   s.close();
 });
+
+test('import: a plain amount in Materials is the materials cost (bought for the job) and reduces after-materials commission', () => {
+  const T = (mat) => readTable(Buffer.from(`Date,Customer,Service,Technician,Amount,Materials\n10/10/2026,Walk-in Client,Knotless Braids,Faith,1400,"${mat}"\n`), 'x.csv');
+  const run = (mat) => planImport(T(mat), REF(), {});
+  const a = run('210'); assert.equal(a.errors.length, 0);
+  assert.deepEqual([a.visits[0].lines[0].materialCents, a.visits[0].lines[0].commission.amountCents], [21000, 59500]);   // 50% x (1,400 - 210)
+  assert.equal(run('KSh 1,200').visits[0].lines[0].commission.amountCents, 10000);
+  assert.equal(run('1500').errors.length, 1);                                                                         // more than the price
+  assert.equal(run('Braids x2').visits[0].lines[0].materialCents, 60000);                                             // stock items still work
+});

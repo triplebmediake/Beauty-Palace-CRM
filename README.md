@@ -170,3 +170,10 @@ On the New sale screen, a hair service has a tick box **Collabo: two hairdresser
 
 ## One installation per branch
 Set `ONLY_BRANCH_CODE` (for example `BPK`) on an installation that serves a single branch. The branch switcher and the "which branch" choices disappear, and that branch is used everywhere.
+
+## Materials you buy for a job (not in stock)
+- At the till: for services paid "after materials", type the KSh amount spent on the job (0 if none). No inventory item is needed.
+- In an import: put a plain amount in the Materials column (`220` or `KSh 220`). Stock items still work by name (`Braids x2`). The amount cannot be more than the service price.
+
+## Service materials ("recipes")
+Services screen -> **Materials** next to a service: list the stock items (and quantities) it uses. Each sale of the service then takes them out of that branch's inventory. Stock must be received first (Inventory), otherwise the sale is blocked with "Not enough stock" unless negative stock is allowed.

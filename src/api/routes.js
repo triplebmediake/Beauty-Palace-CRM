@@ -478,6 +478,30 @@ export function registerRoutes(app, { db, tx, secret, deps = {}, now }) {
     });
     res.json(out);
   });
+  // The "recipe" of a service: stock items taken from inventory each time it is sold (quantities can be adjusted at the till).
+  app.get('/services/:id/materials', ...secure('services.manage'), async (req, res) => {
+    const id = int(req.params.id, 'service');
+    const r = await db.query(`SELECT sm.product_id, p.name, p.unit, sm.default_qty FROM service_materials sm JOIN products p ON p.id = sm.product_id WHERE sm.service_id = $1 ORDER BY p.name`, [id]);
+    res.json({ rows: r.rows.map((x) => ({ productId: Number(x.product_id), name: x.name, unit: x.unit, qty: Number(x.default_qty) })) });
+  });
+  app.put('/services/:id/materials', ...secure('services.manage'), async (req, res) => {
+    const id = int(req.params.id, 'service'), list = Array.isArray(req.body?.materials) ? req.body.materials : null;
+    if (!list || list.length > 30) throw new AppError(422, 'BAD_MATERIALS', 'Send the list of materials (up to 30)');
+    const seen = new Set(), rows = list.map((m) => {
+      const pid = int(m.productId, 'Product'), q = Number(m.qty);
+      if (!Number.isFinite(q) || q <= 0 || q > 10000) throw new AppError(422, 'BAD_QTY', 'Each quantity must be more than 0');
+      if (seen.has(pid)) throw new AppError(422, 'DUPLICATE_PRODUCT', 'Each product can only be listed once'); seen.add(pid); return { pid, q: Math.round(q * 1000) / 1000 };
+    });
+    await tx({ userId: req.user.id, reason: 'Set service materials' }, async (c) => {
+      if (!(await c.query('SELECT 1 FROM services WHERE id = $1', [id])).rowCount) throw new AppError(404, 'NOT_FOUND', 'Service not found');
+      await c.query('DELETE FROM service_materials WHERE service_id = $1', [id]);
+      for (const m of rows) {
+        const ins = await c.query(`INSERT INTO service_materials (service_id, product_id, default_qty) SELECT $1, p.id, $3 FROM products p WHERE p.id = $2`, [id, m.pid, m.q]);
+        if (!ins.rowCount) throw new AppError(422, 'BAD_PRODUCT', 'One of the products was not found');
+      }
+    });
+    res.json({ saved: rows.length, note: 'New sales of this service will take these items out of stock.' });
+  });
   app.get('/technicians', auth, requireAny('staff.view', 'sales.create'), async (req, res) => {
     const br = branchList(req.user, req.query.branchId);
     const r = await db.query(`SELECT t.id, t.display_name, t.phone, t.branch_id, sc.code AS specialty, t.is_active FROM technicians t

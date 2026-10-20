@@ -614,7 +614,7 @@ function viewServices(root) {
     const cats = [...new Set(rows.map((r) => r.category))].sort((a, b) => catName(a).localeCompare(catName(b)));
     const sc = showComm(), heads = [['Service'], ['Price', 1], ['Minutes', 1], ...(sc ? [['Commission']] : []), ['Status'], ['']];
     list.replaceChildren(...(cats.length ? cats.map((c) => h('section', { class: 'card', style: 'margin-bottom:1rem' }, h('h2', {}, catName(c)),
-      table(heads, rows.filter((r) => r.category === c).map((r) => [r.name, money(r.price), r.minutes, ...(sc ? [h('span', {}, fmtRule(r.commission), r.commission?.source === 'service' && h('span', { class: 'tag-pill', style: 'margin-left:.4rem' }, 'custom'))] : []), r.active ? 'On the menu' : 'Hidden', h('button', { class: 'link', onclick: () => editor(r) }, 'Edit')])))) : [h('p', { class: 'muted' }, 'No services match.')]));
+      table(heads, rows.filter((r) => r.category === c).map((r) => [r.name, money(r.price), r.minutes, ...(sc ? [h('span', {}, fmtRule(r.commission), r.commission?.source === 'service' && h('span', { class: 'tag-pill', style: 'margin-left:.4rem' }, 'custom'))] : []), r.active ? 'On the menu' : 'Hidden', h('span', { class: 'row', style: 'gap:.6rem;flex-wrap:nowrap' }, h('button', { class: 'link', onclick: () => editor(r) }, 'Edit'), h('button', { class: 'link', onclick: () => materialsDialog(r) }, 'Materials'))])))) : [h('p', { class: 'muted' }, 'No services match.')]));
     catBox.replaceChildren(sc ? h('section', { class: 'card', style: 'margin-bottom:1rem' }, h('h2', {}, 'Commission by category'),
       h('p', { class: 'small muted' }, 'The rule for every service in a category, unless a service has its own (set it under that service’s Edit).'),
       table([['Category'], ['Commission'], ['']], data.categories.map((c) => [c.name, fmtRule(c.commission), data.canCommission ? h('button', { class: 'link', onclick: () => ruleDialog({ title: 'Commission for ' + c.name, scope: 'category', categoryId: c.id, current: c.commission }) }, 'Change') : '']))) : '');
@@ -633,6 +633,23 @@ function viewServices(root) {
     m = modal(h('h2', {}, title), f.el, h('label', {}, 'Starts from'), from, h('p', { class: 'small muted' }, 'Sales on or after this date use the new rule. Commission already worked out for earlier sales does not change.'), msg,
       h('div', { class: 'row', style: 'margin-top:1rem' }, h('button', { class: 'primary', onclick: async (e) => { e.target.disabled = true;
         try { await api('POST', '/commission-rules', { scope, categoryId, ...f.body(), effectiveFrom: from.value, reason: title }); m.remove(); load(); } catch (x) { msg.textContent = x.message; msg.hidden = false; e.target.disabled = false; } } }, 'Save'), h('button', { onclick: () => m.remove() }, 'Cancel')));
+  };
+  // Stock items a service uses each time it is sold; they are taken out of this branch's inventory automatically.
+  const materialsDialog = async (r) => {
+    let cur, prods;
+    try { [cur, prods] = await Promise.all([api('GET', '/services/' + r.id + '/materials'), api('GET', '/products' + bq('?'))]); } catch (x) { return modal(h('h2', {}, 'Materials'), h('div', { class: 'err' }, x.message)); }
+    const items = prods.rows, rowsBox = h('div'), msg = h('div', { class: 'err', hidden: true }); const list = cur.rows.map((m) => ({ productId: String(m.productId), qty: m.qty })); let m;
+    const draw = () => rowsBox.replaceChildren(...(list.length ? list.map((l, i) => h('div', { class: 'row', style: 'margin-bottom:.4rem' },
+      h('select', { class: 'grow', 'aria-label': 'Item', onchange: (e) => { l.productId = e.target.value; } }, [h('option', { value: '' }, '— choose an item —'), ...items.map((p) => h('option', { value: String(p.id), selected: String(p.id) === l.productId }, p.name + (p.unit ? ' (' + p.unit + ')' : '')))]),
+      h('input', { type: 'number', min: '0', step: '0.01', inputmode: 'decimal', style: 'max-width:6rem', 'aria-label': 'Quantity', value: l.qty, oninput: (e) => { l.qty = e.target.value; } }),
+      h('button', { class: 'link', onclick: () => { list.splice(i, 1); draw(); } }, 'Remove'))) : [h('p', { class: 'muted' }, 'No items yet: this service does not take anything out of stock.')]));
+    draw();
+    m = modal(h('h2', {}, 'Materials for ' + r.name),
+      h('p', { class: 'small muted' }, 'Items taken out of stock every time this service is sold. Only list items you keep in Inventory. Materials you buy for a job are typed in as an amount when selling instead. Past sales do not change.'),
+      rowsBox, h('button', { onclick: () => { list.push({ productId: '', qty: 1 }); draw(); } }, '+ Add an item'), msg,
+      h('div', { class: 'row', style: 'margin-top:1rem' }, h('button', { class: 'primary', onclick: async (e) => { e.target.disabled = true;
+        try { const mats = list.filter((l) => l.productId).map((l) => ({ productId: Number(l.productId), qty: Number(l.qty) })); await api('PUT', '/services/' + r.id + '/materials', { materials: mats }); m.remove(); }
+        catch (x) { msg.textContent = x.message; msg.hidden = false; e.target.disabled = false; } } }, 'Save'), h('button', { onclick: () => m.remove() }, 'Cancel')));
   };
   const editor = (r) => {
     const isNew = !r, name = h('input', { value: r?.name || '', maxlength: 80, placeholder: 'e.g. Acrylic refill' });

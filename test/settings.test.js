@@ -263,3 +263,26 @@ test('branch settings: a branch overrides only what it fills in; blank or defaul
     assert.equal((await put({ branchId: 3, phone: '0711' }, as.owner)).status, 403);                  // owner not assigned to branch 3
   } finally { s.close(); }
 });
+
+test('service materials ("recipe"): list, replace, validate, permission', async () => {
+  const s = await boot([
+    [/FROM service_materials sm JOIN products p/, () => R([{ product_id: 5, name: 'Braids', unit: 'pack', default_qty: '2.000' }])],
+    [/SELECT 1 FROM services WHERE id/, () => R([{}])],
+    [/INSERT INTO service_materials/, () => R([], 1)],
+  ]);
+  try {
+    const g = await s.call('GET', '/services/3/materials', { as: as.owner });
+    assert.deepEqual(g.json.rows, [{ productId: 5, name: 'Braids', unit: 'pack', qty: 2 }]);
+    assert.equal((await s.call('GET', '/services/3/materials', { as: as.technician })).status, 403);
+    const put = (materials, who = as.owner) => s.call('PUT', '/services/3/materials', { as: who, body: { materials } });
+    s.db.log.length = 0;
+    assert.equal((await put([{ productId: 5, qty: 2 }, { productId: 6, qty: 0.5 }])).status, 200);
+    const q = s.db.log.map((l) => l.sql);
+    assert.equal(q.filter((x) => /^DELETE FROM service_materials/.test(x)).length, 1);
+    assert.equal(q.filter((x) => /^INSERT INTO service_materials/.test(x)).length, 2);
+    assert.equal((await put([{ productId: 5, qty: 0 }])).status, 422);
+    assert.equal((await put([{ productId: 5, qty: 1 }, { productId: 5, qty: 2 }])).status, 422);
+    assert.equal((await put([])).status, 200);                                                    // empty list = no stock used
+    assert.equal((await put([{ productId: 5, qty: 1 }], as.receptionist)).status, 403);
+  } finally { s.close(); }
+});
